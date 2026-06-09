@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Guide — Agência Luka</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* ── Style Guide Shell ─────────────────── */
+    .sg-body {
+      background: var(--color-gray-50);
+      min-height: 100vh;
+    }
+
+    .sg-header {
+      background: var(--color-blue-900);
+      color: var(--color-white);
+      padding: var(--space-48) var(--space-80);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sg-header .overline {
+      color: var(--color-green-400);
+      margin-bottom: var(--space-8);
+    }
+
+    .sg-header h1 {
+      font-size: var(--font-size-h2);
+      color: var(--color-white);
+      margin-bottom: var(--space-8);
+    }
+
+    .sg-header p {
+      color: var(--color-blue-200);
+      font-size: var(--font-size-medium);
+    }
+
+    .sg-nav {
+      background: var(--color-blue-800);
+      padding: var(--space-16) var(--space-80);
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .sg-nav a {
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-blue-200);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .sg-nav a:hover {
+      background-color: rgba(255,255,255,0.1);
+      color: var(--color-white);
+    }
+
+    .sg-content {
+      padding: var(--space-80);
+      max-width: 1400px;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-80);
+    }
+
+    /* Seção do Style Guide */
+    .sg-section {
+      background: var(--color-white);
+      border-radius: var(--radius-16);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sg-section__header {
+      padding: var(--space-32) var(--space-40);
+      border-bottom: 1px solid var(--color-gray-100);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-16);
+    }
+
+    .sg-section__number {
+      font-size: var(--font-size-tiny);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-gray-400);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+    }
+
+    .sg-section__title {
+      font-size: var(--font-size-h4);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+      letter-spacing: var(--letter-spacing-tighter);
+    }
+
+    .sg-section__body {
+      padding: var(--space-40);
+    }
+
+    /* Label token */
+    .sg-label {
+      font-size: var(--font-size-tiny);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-gray-500);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      margin-bottom: var(--space-20);
+      display: block;
+    }
+
+    .sg-divider {
+      height: 1px;
+      background: var(--color-gray-100);
+      margin-block: var(--space-40);
+    }
+
+    /* ── 1. CORES ─────────────────────────── */
+    .sg-color-group {
+      margin-bottom: var(--space-40);
+    }
+
+    .sg-color-group:last-child { margin-bottom: 0; }
+
+    .sg-color-swatches {
+      display: flex;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .sg-color-swatch {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      min-width: 80px;
+    }
+
+    .sg-color-swatch__color {
+      height: 64px;
+      border-radius: var(--radius-8);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .sg-color-swatch__name {
+      font-size: 10px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-gray-600);
+      line-height: 1.3;
+    }
+
+    .sg-color-swatch__hex {
+      font-size: 10px;
+      color: var(--color-gray-400);
+      font-family: monospace;
+    }
+
+    /* Brand swatches (maiores) */
+    .sg-brand-swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--space-16);
+    }
+
+    .sg-brand-swatch {
+      border-radius: var(--radius-12);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sg-brand-swatch__color {
+      height: 100px;
+    }
+
+    .sg-brand-swatch__info {
+      padding: var(--space-12) var(--space-16);
+      background: var(--color-white);
+      border: 1px solid var(--color-gray-100);
+      border-top: none;
+      border-radius: 0 0 var(--radius-12) var(--radius-12);
+    }
+
+    .sg-brand-swatch__name {
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+    }
+
+    .sg-brand-swatch__hex {
+      font-size: var(--font-size-tiny);
+      color: var(--color-gray-500);
+      font-family: monospace;
+    }
+
+    .sg-brand-swatch__var {
+      font-size: 10px;
+      color: var(--color-gray-400);
+      font-family: monospace;
+      margin-top: 2px;
+    }
+
+    /* ── 2. TIPOGRAFIA ────────────────────── */
+    .sg-type-sample {
+      padding: var(--space-24) 0;
+      border-bottom: 1px solid var(--color-gray-100);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: var(--space-24);
+      align-items: baseline;
+    }
+
+    .sg-type-sample:last-child { border-bottom: none; }
+
+    .sg-type-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sg-type-meta__name {
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+    }
+
+    .sg-type-meta__spec {
+      font-size: 11px;
+      color: var(--color-gray-400);
+      font-family: monospace;
+      line-height: 1.6;
+    }
+
+    /* ── 3. ESPAÇAMENTOS ──────────────────── */
+    .sg-spacing-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    .sg-spacing-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-24);
+    }
+
+    .sg-spacing-item__bar {
+      background: var(--color-brand-blue);
+      height: 24px;
+      border-radius: var(--radius-4);
+      opacity: 0.7;
+      min-width: 2px;
+    }
+
+    .sg-spacing-item__label {
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+      min-width: 60px;
+    }
+
+    .sg-spacing-item__token {
+      font-size: var(--font-size-tiny);
+      color: var(--color-gray-500);
+      font-family: monospace;
+    }
+
+    /* ── 4. BORDER RADIUS ─────────────────── */
+    .sg-radius-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-24);
+    }
+
+    .sg-radius-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-12);
+    }
+
+    .sg-radius-item__box {
+      width: 80px;
+      height: 80px;
+      background: var(--color-blue-100);
+      border: 2px solid var(--color-brand-blue);
+    }
+
+    .sg-radius-item__label {
+      font-size: var(--font-size-tiny);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+      text-align: center;
+    }
+
+    .sg-radius-item__token {
+      font-size: 10px;
+      color: var(--color-gray-400);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    /* ── 5. BOTÕES ────────────────────────── */
+    .sg-component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+      align-items: center;
+      padding: var(--space-24) 0;
+      border-bottom: 1px solid var(--color-gray-100);
+    }
+
+    .sg-component-row:last-child { border-bottom: none; }
+
+    .sg-component-row__label {
+      font-size: var(--font-size-small);
+      color: var(--color-gray-500);
+      min-width: 120px;
+    }
+
+    .sg-dark-bg {
+      background: var(--color-blue-900);
+      padding: var(--space-24);
+      border-radius: var(--radius-12);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-16);
+      align-items: center;
+    }
+
+    /* ── 6. TAGS ──────────────────────────── */
+    .sg-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-12);
+      align-items: center;
+      padding: var(--space-20) 0;
+      border-bottom: 1px solid var(--color-gray-100);
+    }
+
+    .sg-tags-row:last-child { border-bottom: none; }
+
+    /* ── 7. CARDS ─────────────────────────── */
+    .sg-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-24);
+    }
+
+    /* ── 8. INPUTS ────────────────────────── */
+    .sg-inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-24);
+    }
+
+    /* ── 9. ÍCONES ────────────────────────── */
+    .sg-icons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: var(--space-16);
+    }
+
+    .sg-icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-8);
+      padding: var(--space-16);
+      border-radius: var(--radius-8);
+      border: 1px solid var(--color-gray-100);
+      transition: background-color var(--transition-fast);
+    }
+
+    .sg-icon-item:hover {
+      background-color: var(--color-gray-50);
+    }
+
+    .sg-icon-item img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .sg-icon-item span {
+      font-size: 10px;
+      color: var(--color-gray-500);
+      text-align: center;
+      word-break: break-all;
+    }
+
+    /* ── 10. LOGOS ────────────────────────── */
+    .sg-logos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-24);
+    }
+
+    .sg-logo-item {
+      padding: var(--space-32);
+      border-radius: var(--radius-12);
+      border: 1px solid var(--color-gray-100);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-16);
+    }
+
+    .sg-logo-item--dark {
+      background: var(--color-blue-900);
+      border-color: var(--color-blue-700);
+    }
+
+    .sg-logo-item img {
+      max-height: 48px;
+      width: auto;
+    }
+
+    .sg-logo-item span {
+      font-size: var(--font-size-tiny);
+      color: var(--color-gray-400);
+    }
+
+    .sg-logo-item--dark span {
+      color: var(--color-blue-300);
+    }
+
+    /* ── LAYOUT GRID ─────────────────────────── */
+    .sg-grid-demo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-48);
+    }
+
+    .sg-grid-demo__breakpoint {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    .sg-grid-frame {
+      width: 100%;
+      background: var(--color-gray-50);
+      border-radius: var(--radius-8);
+      overflow: hidden;
+      border: 1px solid var(--color-gray-100);
+      position: relative;
+      height: 120px;
+    }
+
+    .sg-grid-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+    }
+
+    .sg-grid-margin {
+      flex-shrink: 0;
+      background: rgba(249, 115, 22, 0.08);
+      border-right: 1.5px dashed rgba(249,115,22,0.5);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 8px;
+    }
+
+    .sg-grid-margin--right {
+      border-right: none;
+      border-left: 1.5px dashed rgba(249,115,22,0.5);
+    }
+
+    .sg-grid-margin span {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--color-brand-orange);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 0.04em;
+    }
+
+    .sg-grid-margin--right span {
+      transform: rotate(0deg);
+    }
+
+    .sg-grid-cols {
+      flex: 1;
+      display: flex;
+    }
+
+    .sg-grid-col {
+      flex: 1;
+      background: rgba(30, 58, 138, 0.07);
+      border-left: 1px solid rgba(30, 58, 138, 0.2);
+      border-right: 1px solid rgba(30, 58, 138, 0.2);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 10px;
+    }
+
+    .sg-grid-col span {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--color-brand-blue);
+      opacity: 0.6;
+    }
+
+    .sg-grid-gutter {
+      flex-shrink: 0;
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 1px dashed rgba(16,185,129,0.5);
+      border-right: 1px dashed rgba(16,185,129,0.5);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 8px;
+    }
+
+    .sg-grid-gutter span {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--color-brand-green);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .sg-grid-specs {
+      display: flex;
+      gap: var(--space-32);
+      flex-wrap: wrap;
+      margin-top: var(--space-8);
+    }
+
+    .sg-grid-spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sg-grid-spec-item__label {
+      font-size: 10px;
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-gray-400);
+    }
+
+    .sg-grid-spec-item__value {
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+      font-family: monospace;
+    }
+
+    .sg-grid-spec-item__token {
+      font-size: 10px;
+      color: var(--color-gray-400);
+      font-family: monospace;
+    }
+
+    .sg-grid-legend {
+      display: flex;
+      gap: var(--space-24);
+      align-items: center;
+      flex-wrap: wrap;
+      padding: var(--space-16) 0 var(--space-8);
+      border-top: 1px solid var(--color-gray-100);
+      margin-top: var(--space-24);
+    }
+
+    .sg-grid-legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      font-size: var(--font-size-tiny);
+      color: var(--color-gray-600);
+    }
+
+    .sg-grid-legend-color {
+      width: 16px;
+      height: 10px;
+      border-radius: var(--radius-2);
+    }
+
+    /* ── 11. SOMBRAS ──────────────────────── */
+    .sg-shadows-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-32);
+    }
+
+    .sg-shadow-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-16);
+    }
+
+    .sg-shadow-item__box {
+      width: 120px;
+      height: 80px;
+      background: var(--color-white);
+      border-radius: var(--radius-12);
+    }
+
+    .sg-shadow-item__label {
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-dark);
+    }
+
+    .sg-shadow-item__token {
+      font-size: var(--font-size-tiny);
+      color: var(--color-gray-400);
+      font-family: monospace;
+    }
+
+    @media (max-width: 1024px) {
+      .sg-header, .sg-nav { padding-inline: var(--space-40); }
+      .sg-content { padding: var(--space-40); }
+    }
+
+    @media (max-width: 768px) {
+      .sg-header, .sg-nav { padding-inline: var(--space-24); }
+      .sg-content { padding: var(--space-24); gap: var(--space-40); }
+      .sg-section__header { padding: var(--space-24) var(--space-24); }
+      .sg-section__body { padding: var(--space-24); }
+      .sg-type-sample { grid-template-columns: 1fr; }
+      .sg-inputs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="sg-body">
+
+  <!-- Header -->
+  <header class="sg-header">
+    <p class="overline">Design System</p>
+    <h1>Style Guide — Agência Luka</h1>
+    <p>Tokens, componentes e padrões do website 2026</p>
+  </header>
+
+  <!-- Nav -->
+  <nav class="sg-nav">
+    <a href="#cores">Cores</a>
+    <a href="#tipografia">Tipografia</a>
+    <a href="#espacamentos">Espaçamentos</a>
+    <a href="#radius">Border Radius</a>
+    <a href="#sombras">Sombras</a>
+    <a href="#botoes">Botões</a>
+    <a href="#tags">Tags & Badges</a>
+    <a href="#cards">Cards</a>
+    <a href="#inputs">Inputs</a>
+    <a href="#faq">FAQ</a>
+    <a href="#icones">Ícones</a>
+    <a href="#logos">Logos</a>
+    <a href="#tagline">Tagline</a>
+    <a href="#depoimento">Depoimento</a>
+    <a href="#footer">Footer</a>
+    <a href="#service-item">Service Item</a>
+    <a href="#layout-grid">Layout Grid</a>
+  </nav>
+
+  <main class="sg-content">
+
+    <!-- 1. CORES -->
+    <section class="sg-section" id="cores">
+      <div class="sg-section__header">
+        <span class="sg-section__number">01</span>
+        <h2 class="sg-section__title">Cores</h2>
+      </div>
+      <div class="sg-section__body">
+
+        <!-- Brand -->
+        <span class="sg-label">Cores Brand</span>
+        <div class="sg-brand-swatches">
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#1e3a8a"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">Blue</div>
+              <div class="sg-brand-swatch__hex">#1e3a8a</div>
+              <div class="sg-brand-swatch__var">--color-brand-blue</div>
+            </div>
+          </div>
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#10b981"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">Green</div>
+              <div class="sg-brand-swatch__hex">#10b981</div>
+              <div class="sg-brand-swatch__var">--color-brand-green</div>
+            </div>
+          </div>
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#6d28d9"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">Violet</div>
+              <div class="sg-brand-swatch__hex">#6d28d9</div>
+              <div class="sg-brand-swatch__var">--color-brand-violet</div>
+            </div>
+          </div>
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#f97316"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">Orange</div>
+              <div class="sg-brand-swatch__hex">#f97316</div>
+              <div class="sg-brand-swatch__var">--color-brand-orange</div>
+            </div>
+          </div>
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#d1d5db"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">Brand Gray</div>
+              <div class="sg-brand-swatch__hex">#d1d5db</div>
+              <div class="sg-brand-swatch__var">--color-brand-gray</div>
+            </div>
+          </div>
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#1a1a1a"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">Dark</div>
+              <div class="sg-brand-swatch__hex">#1a1a1a</div>
+              <div class="sg-brand-swatch__var">--color-dark</div>
+            </div>
+          </div>
+          <div class="sg-brand-swatch">
+            <div class="sg-brand-swatch__color" style="background:#ffffff; border:1px solid #e5e7eb"></div>
+            <div class="sg-brand-swatch__info">
+              <div class="sg-brand-swatch__name">White</div>
+              <div class="sg-brand-swatch__hex">#ffffff</div>
+              <div class="sg-brand-swatch__var">--color-white</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sg-divider"></div>
+
+        <!-- Escala Blue -->
+        <span class="sg-label">Escala Blue</span>
+        <div class="sg-color-group">
+          <div class="sg-color-swatches">
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#e9ebf8"></div><div class="sg-color-swatch__name">Blue 50</div><div class="sg-color-swatch__hex">#e9ebf8</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#b9c2db"></div><div class="sg-color-swatch__name">Blue 100</div><div class="sg-color-swatch__hex">#b9c2db</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#98a4c9"></div><div class="sg-color-swatch__name">Blue 200</div><div class="sg-color-swatch__hex">#98a4c9</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#687bb1"></div><div class="sg-color-swatch__name">Blue 300</div><div class="sg-color-swatch__hex">#687bb1</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#4b61a1"></div><div class="sg-color-swatch__name">Blue 400</div><div class="sg-color-swatch__hex">#4b61a1</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#1e3a8a"></div><div class="sg-color-swatch__name">Blue 500 ★</div><div class="sg-color-swatch__hex">#1e3a8a</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#1b357e"></div><div class="sg-color-swatch__name">Blue 600</div><div class="sg-color-swatch__hex">#1b357e</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#152962"></div><div class="sg-color-swatch__name">Blue 700</div><div class="sg-color-swatch__hex">#152962</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#11204c"></div><div class="sg-color-swatch__name">Blue 800</div><div class="sg-color-swatch__hex">#11204c</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#0d183a"></div><div class="sg-color-swatch__name">Blue 900</div><div class="sg-color-swatch__hex">#0d183a</div></div>
+          </div>
+        </div>
+
+        <!-- Escala Green -->
+        <span class="sg-label">Escala Green</span>
+        <div class="sg-color-group">
+          <div class="sg-color-swatches">
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#e7f8f2"></div><div class="sg-color-swatch__name">Green 50</div><div class="sg-color-swatch__hex">#e7f8f2</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#b5e9d8"></div><div class="sg-color-swatch__name">Green 100</div><div class="sg-color-swatch__hex">#b5e9d8</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#91dfc5"></div><div class="sg-color-swatch__name">Green 200</div><div class="sg-color-swatch__hex">#91dfc5</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#5fd0ab"></div><div class="sg-color-swatch__name">Green 300</div><div class="sg-color-swatch__hex">#5fd0ab</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#40c79a"></div><div class="sg-color-swatch__name">Green 400</div><div class="sg-color-swatch__hex">#40c79a</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#10b981"></div><div class="sg-color-swatch__name">Green 500 ★</div><div class="sg-color-swatch__hex">#10b981</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#0fa875"></div><div class="sg-color-swatch__name">Green 600</div><div class="sg-color-swatch__hex">#0fa875</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#0b835c"></div><div class="sg-color-swatch__name">Green 700</div><div class="sg-color-swatch__hex">#0b835c</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#096647"></div><div class="sg-color-swatch__name">Green 800</div><div class="sg-color-swatch__hex">#096647</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#074e36"></div><div class="sg-color-swatch__name">Green 900</div><div class="sg-color-swatch__hex">#074e36</div></div>
+          </div>
+        </div>
+
+        <!-- Escala Violet -->
+        <span class="sg-label">Escala Violet</span>
+        <div class="sg-color-group">
+          <div class="sg-color-swatches">
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#f0eafb"></div><div class="sg-color-swatch__name">Violet 50</div><div class="sg-color-swatch__hex">#f0eafb</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#d2bcf3"></div><div class="sg-color-swatch__name">Violet 100</div><div class="sg-color-swatch__hex">#d2bcf3</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#bc9cee"></div><div class="sg-color-swatch__name">Violet 200</div><div class="sg-color-swatch__hex">#bc9cee</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#9d6fe6"></div><div class="sg-color-swatch__name">Violet 300</div><div class="sg-color-swatch__hex">#9d6fe6</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#8a53e1"></div><div class="sg-color-swatch__name">Violet 400</div><div class="sg-color-swatch__hex">#8a53e1</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#6d28d9"></div><div class="sg-color-swatch__name">Violet 500 ★</div><div class="sg-color-swatch__hex">#6d28d9</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#6324c5"></div><div class="sg-color-swatch__name">Violet 600</div><div class="sg-color-swatch__hex">#6324c5</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#4d1c9a"></div><div class="sg-color-swatch__name">Violet 700</div><div class="sg-color-swatch__hex">#4d1c9a</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#3c1677"></div><div class="sg-color-swatch__name">Violet 800</div><div class="sg-color-swatch__hex">#3c1677</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#2e115b"></div><div class="sg-color-swatch__name">Violet 900</div><div class="sg-color-swatch__hex">#2e115b</div></div>
+          </div>
+        </div>
+
+        <!-- Escala Orange -->
+        <span class="sg-label">Escala Orange</span>
+        <div class="sg-color-group">
+          <div class="sg-color-swatches">
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#fef1e8"></div><div class="sg-color-swatch__name">Orange 50</div><div class="sg-color-swatch__hex">#fef1e8</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#fdd4b7"></div><div class="sg-color-swatch__name">Orange 100</div><div class="sg-color-swatch__hex">#fdd4b7</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#fcbf94"></div><div class="sg-color-swatch__name">Orange 200</div><div class="sg-color-swatch__hex">#fcbf94</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#fba163"></div><div class="sg-color-swatch__name">Orange 300</div><div class="sg-color-swatch__hex">#fba163</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#fa8f45"></div><div class="sg-color-swatch__name">Orange 400</div><div class="sg-color-swatch__hex">#fa8f45</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#f97316"></div><div class="sg-color-swatch__name">Orange 500 ★</div><div class="sg-color-swatch__hex">#f97316</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#e36914"></div><div class="sg-color-swatch__name">Orange 600</div><div class="sg-color-swatch__hex">#e36914</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#b15210"></div><div class="sg-color-swatch__name">Orange 700</div><div class="sg-color-swatch__hex">#b15210</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#893f0c"></div><div class="sg-color-swatch__name">Orange 800</div><div class="sg-color-swatch__hex">#893f0c</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#693009"></div><div class="sg-color-swatch__name">Orange 900</div><div class="sg-color-swatch__hex">#693009</div></div>
+          </div>
+        </div>
+
+        <!-- Escala Gray -->
+        <span class="sg-label">Escala Gray</span>
+        <div class="sg-color-group">
+          <div class="sg-color-swatches">
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#f3f3f4"></div><div class="sg-color-swatch__name">Gray 50</div><div class="sg-color-swatch__hex">#f3f3f4</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#d9dbdc"></div><div class="sg-color-swatch__name">Gray 100</div><div class="sg-color-swatch__hex">#d9dbdc</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#c6c9cb"></div><div class="sg-color-swatch__name">Gray 200</div><div class="sg-color-swatch__hex">#c6c9cb</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#adb1b3"></div><div class="sg-color-swatch__name">Gray 300</div><div class="sg-color-swatch__hex">#adb1b3</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#9da1a5"></div><div class="sg-color-swatch__name">Gray 400</div><div class="sg-color-swatch__hex">#9da1a5</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#848a8e"></div><div class="sg-color-swatch__name">Gray 500</div><div class="sg-color-swatch__hex">#848a8e</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#787e81"></div><div class="sg-color-swatch__name">Gray 600</div><div class="sg-color-swatch__hex">#787e81</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#5e6265"></div><div class="sg-color-swatch__name">Gray 700</div><div class="sg-color-swatch__hex">#5e6265</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#494c4e"></div><div class="sg-color-swatch__name">Gray 800</div><div class="sg-color-swatch__hex">#494c4e</div></div>
+            <div class="sg-color-swatch"><div class="sg-color-swatch__color" style="background:#373a3c"></div><div class="sg-color-swatch__name">Gray 900</div><div class="sg-color-swatch__hex">#373a3c</div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. TIPOGRAFIA -->
+    <section class="sg-section" id="tipografia">
+      <div class="sg-section__header">
+        <span class="sg-section__number">02</span>
+        <h2 class="sg-section__title">Tipografia</h2>
+      </div>
+      <div class="sg-section__body">
+        <span class="sg-label">Família: Poppins · Google Fonts</span>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Display</span>
+            <span class="sg-type-meta__spec">72px · Bold · lh 120% · ls -0.5%</span>
+          </div>
+          <div class="text-display">Agência Luka</div>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">H1</span>
+            <span class="sg-type-meta__spec">56px · Bold · lh 120% · ls -0.5%</span>
+          </div>
+          <h1>Transformamos marcas em resultados</h1>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">H2</span>
+            <span class="sg-type-meta__spec">48px · SemiBold · lh 120% · ls -0.5%</span>
+          </div>
+          <h2>Nossos Serviços</h2>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">H3</span>
+            <span class="sg-type-meta__spec">40px · SemiBold · lh 125% · ls -0.4%</span>
+          </div>
+          <h3>Branding & Identidade</h3>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">H4</span>
+            <span class="sg-type-meta__spec">32px · SemiBold · lh 130% · ls -0.4%</span>
+          </div>
+          <h4>Design de produto digital</h4>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">H5</span>
+            <span class="sg-type-meta__spec">26px · SemiBold · lh 135% · ls -0.3%</span>
+          </div>
+          <h5>Estratégia de comunicação</h5>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">H6</span>
+            <span class="sg-type-meta__spec">22px · SemiBold · lh 140% · ls -0.3%</span>
+          </div>
+          <h6>Fotografia e audiovisual</h6>
+        </div>
+
+        <div class="sg-divider"></div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Text Large</span>
+            <span class="sg-type-meta__spec">20px · Regular · lh 150%</span>
+          </div>
+          <p class="text-large">Somos uma agência criativa focada em resultados mensuráveis.</p>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Text Medium</span>
+            <span class="sg-type-meta__spec">18px · Regular · lh 150%</span>
+          </div>
+          <p class="text-medium">Desenvolvemos estratégias personalizadas para cada cliente.</p>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Text Regular</span>
+            <span class="sg-type-meta__spec">16px · Regular · lh 150%</span>
+          </div>
+          <p class="text-regular">Nossa equipe multidisciplinar combina criatividade e tecnologia para entregar projetos que geram impacto real no negócio dos nossos clientes.</p>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Text Small</span>
+            <span class="sg-type-meta__spec">14px · Regular · lh 150%</span>
+          </div>
+          <p class="text-small">Informação complementar, legendas e textos de suporte.</p>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Text Tiny</span>
+            <span class="sg-type-meta__spec">12px · Regular · lh 150%</span>
+          </div>
+          <p class="text-tiny">Termos, notas de rodapé e metadados secundários.</p>
+        </div>
+
+        <div class="sg-type-sample">
+          <div class="sg-type-meta">
+            <span class="sg-type-meta__name">Overline</span>
+            <span class="sg-type-meta__spec">12px · SemiBold · ls 8% · uppercase</span>
+          </div>
+          <p class="overline">Sobre a Agência</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. ESPAÇAMENTOS -->
+    <section class="sg-section" id="espacamentos">
+      <div class="sg-section__header">
+        <span class="sg-section__number">03</span>
+        <h2 class="sg-section__title">Espaçamentos</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="sg-spacing-grid">
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:4px"></div><span class="sg-spacing-item__label">4px</span><span class="sg-spacing-item__token">--space-4</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:8px"></div><span class="sg-spacing-item__label">8px</span><span class="sg-spacing-item__token">--space-8</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:12px"></div><span class="sg-spacing-item__label">12px</span><span class="sg-spacing-item__token">--space-12</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:16px"></div><span class="sg-spacing-item__label">16px</span><span class="sg-spacing-item__token">--space-16</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:20px"></div><span class="sg-spacing-item__label">20px</span><span class="sg-spacing-item__token">--space-20</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:24px"></div><span class="sg-spacing-item__label">24px</span><span class="sg-spacing-item__token">--space-24</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:32px"></div><span class="sg-spacing-item__label">32px</span><span class="sg-spacing-item__token">--space-32</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:40px"></div><span class="sg-spacing-item__label">40px</span><span class="sg-spacing-item__token">--space-40</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:48px"></div><span class="sg-spacing-item__label">48px</span><span class="sg-spacing-item__token">--space-48</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:64px"></div><span class="sg-spacing-item__label">64px</span><span class="sg-spacing-item__token">--space-64</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:80px"></div><span class="sg-spacing-item__label">80px</span><span class="sg-spacing-item__token">--space-80</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:96px"></div><span class="sg-spacing-item__label">96px</span><span class="sg-spacing-item__token">--space-96</span></div>
+          <div class="sg-spacing-item"><div class="sg-spacing-item__bar" style="width:120px"></div><span class="sg-spacing-item__label">120px</span><span class="sg-spacing-item__token">--space-120</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BORDER RADIUS -->
+    <section class="sg-section" id="radius">
+      <div class="sg-section__header">
+        <span class="sg-section__number">04</span>
+        <h2 class="sg-section__title">Border Radius</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="sg-radius-grid">
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:0"></div><span class="sg-radius-item__label">None</span><span class="sg-radius-item__token">--radius-none</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:2px"></div><span class="sg-radius-item__label">2px</span><span class="sg-radius-item__token">--radius-2</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:4px"></div><span class="sg-radius-item__label">4px</span><span class="sg-radius-item__token">--radius-4</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:6px"></div><span class="sg-radius-item__label">6px</span><span class="sg-radius-item__token">--radius-6</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:8px"></div><span class="sg-radius-item__label">8px</span><span class="sg-radius-item__token">--radius-8</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:12px"></div><span class="sg-radius-item__label">12px</span><span class="sg-radius-item__token">--radius-12</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:16px"></div><span class="sg-radius-item__label">16px</span><span class="sg-radius-item__token">--radius-16</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:20px"></div><span class="sg-radius-item__label">20px</span><span class="sg-radius-item__token">--radius-20</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:24px"></div><span class="sg-radius-item__label">24px</span><span class="sg-radius-item__token">--radius-24</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:32px"></div><span class="sg-radius-item__label">32px</span><span class="sg-radius-item__token">--radius-32</span></div>
+          <div class="sg-radius-item"><div class="sg-radius-item__box" style="border-radius:9999px"></div><span class="sg-radius-item__label">Full</span><span class="sg-radius-item__token">--radius-full</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SOMBRAS -->
+    <section class="sg-section" id="sombras">
+      <div class="sg-section__header">
+        <span class="sg-section__number">05</span>
+        <h2 class="sg-section__title">Sombras</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="sg-shadows-grid">
+          <div class="sg-shadow-item">
+            <div class="sg-shadow-item__box" style="box-shadow:none; border:1px solid var(--color-gray-100)"></div>
+            <span class="sg-shadow-item__label">None</span>
+            <span class="sg-shadow-item__token">box-shadow: none</span>
+          </div>
+          <div class="sg-shadow-item">
+            <div class="sg-shadow-item__box" style="box-shadow:var(--shadow-sm)"></div>
+            <span class="sg-shadow-item__label">Small</span>
+            <span class="sg-shadow-item__token">--shadow-sm</span>
+          </div>
+          <div class="sg-shadow-item">
+            <div class="sg-shadow-item__box" style="box-shadow:var(--shadow-md)"></div>
+            <span class="sg-shadow-item__label">Medium</span>
+            <span class="sg-shadow-item__token">--shadow-md</span>
+          </div>
+          <div class="sg-shadow-item">
+            <div class="sg-shadow-item__box" style="box-shadow:var(--shadow-lg)"></div>
+            <span class="sg-shadow-item__label">Large</span>
+            <span class="sg-shadow-item__token">--shadow-lg</span>
+          </div>
+          <div class="sg-shadow-item">
+            <div class="sg-shadow-item__box" style="box-shadow:var(--shadow-xl)"></div>
+            <span class="sg-shadow-item__label">Extra Large</span>
+            <span class="sg-shadow-item__token">--shadow-xl</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. BOTÕES -->
+    <section class="sg-section" id="botoes">
+      <div class="sg-section__header">
+        <span class="sg-section__number">06</span>
+        <h2 class="sg-section__title">Botões</h2>
+      </div>
+      <div class="sg-section__body">
+
+        <span class="sg-label">Estrutura — pill com ícone circular à direita</span>
+        <div class="sg-component-row">
+          <span class="sg-component-row__label">Light<br><small style="color:var(--color-gray-400);font-weight:400">Seções claras</small></span>
+          <a href="#" class="btn btn--light">
+            Saiba mais
+            <span class="btn__icon">
+              <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </span>
+          </a>
+          <a href="#" class="btn btn--light">
+            Ver portfólio
+            <span class="btn__icon">
+              <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </span>
+          </a>
+          <a href="#" class="btn btn--light">
+            Fale conosco
+            <span class="btn__icon">
+              <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </span>
+          </a>
+        </div>
+        <div class="sg-component-row" style="border-bottom:none">
+          <span class="sg-component-row__label">Dark bg<br><small style="color:var(--color-gray-400);font-weight:400">Hero, CTA</small></span>
+          <div class="sg-dark-bg">
+            <a href="#" class="btn btn--dark-bg">
+              Começar agora
+              <span class="btn__icon">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              </span>
+            </a>
+            <a href="#" class="btn btn--dark-bg">
+              Ver projetos
+              <span class="btn__icon">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="sg-divider"></div>
+        <span class="sg-label">Estado disabled</span>
+        <div class="sg-component-row" style="border-bottom:none">
+          <span class="sg-component-row__label">Disabled</span>
+          <button class="btn btn--light" disabled>
+            Indisponível
+            <span class="btn__icon">
+              <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. TAGS & BADGES -->
+    <section class="sg-section" id="tags">
+      <div class="sg-section__header">
+        <span class="sg-section__number">07</span>
+        <h2 class="sg-section__title">Tags & Badges</h2>
+      </div>
+      <div class="sg-section__body">
+
+        <span class="sg-label">Tags</span>
+        <div class="sg-tags-row">
+          <span class="tag tag--blue">Branding</span>
+          <span class="tag tag--green">Web Design</span>
+          <span class="tag tag--violet">Fotografia</span>
+          <span class="tag tag--orange">Marketing</span>
+          <span class="tag tag--gray">Estratégia</span>
+        </div>
+
+        <div class="sg-divider"></div>
+        <span class="sg-label">Badges</span>
+        <div class="sg-tags-row">
+          <span class="badge badge--blue">3</span>
+          <span class="badge badge--green">12</span>
+          <span class="badge badge--violet">7</span>
+          <span class="badge badge--orange">99+</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. CARDS -->
+    <section class="sg-section" id="cards">
+      <div class="sg-section__header">
+        <span class="sg-section__number">08</span>
+        <h2 class="sg-section__title">Cards</h2>
+      </div>
+      <div class="sg-section__body">
+
+        <span class="sg-label">Card / Serviços — com imagem real</span>
+        <div class="sg-cards-grid">
+
+          <a href="#" class="card-service">
+            <div class="card-service__media">
+              <img class="card-service__img" src="assets/servicos-branding.png" alt="Branding">
+              <div class="card-service__overlay" style="background-color:#10b981"></div>
+              <div class="card-service__arrow">
+                <svg viewBox="0 0 24 24"><path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"/></svg>
+              </div>
+              <div class="card-service__tags">
+                <span class="card-tag"><span class="card-tag__dot"></span>branding</span>
+                <span class="card-tag"><span class="card-tag__dot"></span>identidade visual</span>
+              </div>
+              <h3 class="card-service__title">Nome do projeto</h3>
+            </div>
+          </a>
+
+          <a href="#" class="card-service">
+            <div class="card-service__media">
+              <img class="card-service__img" src="assets/servicos-web.png" alt="Web">
+              <div class="card-service__overlay" style="background-color:#1e3a8a"></div>
+              <div class="card-service__arrow">
+                <svg viewBox="0 0 24 24"><path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"/></svg>
+              </div>
+              <div class="card-service__tags">
+                <span class="card-tag"><span class="card-tag__dot"></span>web design</span>
+                <span class="card-tag"><span class="card-tag__dot"></span>mídias sociais</span>
+              </div>
+              <h3 class="card-service__title">Nome do projeto</h3>
+            </div>
+          </a>
+
+          <a href="#" class="card-service">
+            <div class="card-service__media">
+              <img class="card-service__img" src="assets/servicos-fotografia.png" alt="Fotografia">
+              <div class="card-service__overlay" style="background-color:#6d28d9"></div>
+              <div class="card-service__arrow">
+                <svg viewBox="0 0 24 24"><path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"/></svg>
+              </div>
+              <div class="card-service__tags">
+                <span class="card-tag"><span class="card-tag__dot"></span>fotografia</span>
+              </div>
+              <h3 class="card-service__title">Nome do projeto</h3>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 9. INPUTS -->
+    <section class="sg-section" id="inputs">
+      <div class="sg-section__header">
+        <span class="sg-section__number">09</span>
+        <h2 class="sg-section__title">Inputs</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="sg-inputs-grid">
+
+          <div class="input-group">
+            <label class="input-label">Nome (padrão)</label>
+            <input type="text" class="input" placeholder="Digite seu nome">
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Email (focus)</label>
+            <input type="email" class="input" placeholder="seu@email.com" value="contato@agencialuka.com.br">
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Campo com erro</label>
+            <input type="text" class="input input--error" value="valor inválido">
+            <span class="input-hint input-hint--error">Este campo é obrigatório.</span>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Campo desabilitado</label>
+            <input type="text" class="input" placeholder="Não editável" disabled>
+            <span class="input-hint">Este campo não pode ser editado.</span>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label">Select</label>
+            <select class="input">
+              <option value="">Selecione um serviço</option>
+              <option>Branding</option>
+              <option>Web Design</option>
+              <option>Fotografia</option>
+              <option>Marketing</option>
+            </select>
+          </div>
+
+          <div class="input-group" style="grid-column: span 1">
+            <label class="input-label">Mensagem (textarea)</label>
+            <textarea class="input" placeholder="Descreva seu projeto..."></textarea>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="sg-section" id="faq">
+      <div class="sg-section__header">
+        <span class="sg-section__number">10</span>
+        <h2 class="sg-section__title">FAQ Item</h2>
+      </div>
+      <div class="sg-section__body">
+        <span class="sg-label">Clique para abrir/fechar</span>
+
+        <div style="display:flex; flex-direction:column; gap:var(--space-12); max-width:640px">
+
+          <div class="faq-item is-open">
+            <button class="faq-item__trigger" aria-expanded="true">
+              <span class="faq-item__question">O que é identidade visual e por que é importante?</span>
+              <span class="faq-item__icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+              </span>
+            </button>
+            <div class="faq-item__body">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">Identidade visual é o conjunto de elementos gráficos que representam uma marca — logotipo, cores, tipografia e outros elementos visuais. Ela é fundamental para criar reconhecimento, transmitir valores e diferenciar sua empresa no mercado.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false">
+              <span class="faq-item__question">Quanto tempo leva para criar um website?</span>
+              <span class="faq-item__icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+              </span>
+            </button>
+            <div class="faq-item__body">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">O prazo varia conforme a complexidade do projeto. Um site institucional simples leva em média 4 a 6 semanas, incluindo design, desenvolvimento e revisões. Projetos mais complexos podem levar de 2 a 4 meses.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false">
+              <span class="faq-item__question">Vocês trabalham com clientes de todo o Brasil?</span>
+              <span class="faq-item__icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+              </span>
+            </button>
+            <div class="faq-item__body">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">Sim! Atendemos clientes em todo o Brasil e também no exterior. Todo nosso processo é 100% remoto, com reuniões online e entregas digitais.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. ÍCONES -->
+    <section class="sg-section" id="icones">
+      <div class="sg-section__header">
+        <span class="sg-section__number">11</span>
+        <h2 class="sg-section__title">Ícones</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="sg-icons-grid">
+          <div class="sg-icon-item">
+            <img src="assets/icon-facebook.svg" alt="Facebook">
+            <span>icon-facebook</span>
+          </div>
+          <div class="sg-icon-item">
+            <img src="assets/icon-instagram.svg" alt="Instagram">
+            <span>icon-instagram</span>
+          </div>
+          <div class="sg-icon-item">
+            <img src="assets/icon-linkedin.svg" alt="LinkedIn">
+            <span>icon-linkedin</span>
+          </div>
+          <div class="sg-icon-item">
+            <img src="assets/icon-pinterest.svg" alt="Pinterest">
+            <span>icon-pinterest</span>
+          </div>
+          <div class="sg-icon-item">
+            <img src="assets/arrow_downward_alt.svg" alt="Arrow Down">
+            <span>arrow_downward</span>
+          </div>
+          <div class="sg-icon-item">
+            <img src="assets/chevron_forward.svg" alt="Chevron">
+            <span>chevron_forward</span>
+          </div>
+          <div class="sg-icon-item">
+            <img src="assets/sinal-de-mais.svg" alt="Plus">
+            <span>sinal-de-mais</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. LOGOS -->
+    <section class="sg-section" id="logos">
+      <div class="sg-section__header">
+        <span class="sg-section__number">12</span>
+        <h2 class="sg-section__title">Logos</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="sg-logos-grid">
+          <div class="sg-logo-item">
+            <img src="assets/logo-navbar.svg" alt="Logo Navbar">
+            <span>logo-navbar.svg</span>
+          </div>
+          <div class="sg-logo-item sg-logo-item--dark">
+            <img src="assets/logo-navbar.svg" alt="Logo (fundo escuro)">
+            <span>Fundo escuro</span>
+          </div>
+          <div class="sg-logo-item">
+            <img src="assets/logo-servicos.svg" alt="Logo Serviços">
+            <span>logo-servicos.svg</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. TAGLINE -->
+    <section class="sg-section" id="tagline">
+      <div class="sg-section__header">
+        <span class="sg-section__number">13</span>
+        <h2 class="sg-section__title">Tagline</h2>
+      </div>
+      <div class="sg-section__body" style="display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
+        <!-- Em fundo escuro -->
+        <div style="background: var(--color-blue-900); padding: 40px 48px; border-radius: var(--radius-12); display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px;">Em fundo escuro</span>
+          <div class="tagline">
+            <span class="tagline__dot"></span>
+            <span class="tagline__text">Marketing 360</span>
+          </div>
+          <div class="tagline">
+            <span class="tagline__dot"></span>
+            <span class="tagline__text">Nossos serviços</span>
+          </div>
+          <div class="tagline">
+            <span class="tagline__dot"></span>
+            <span class="tagline__text">Sobre nós</span>
+          </div>
+        </div>
+        <!-- Em fundo claro -->
+        <div style="background: var(--color-white); border: 1px solid var(--color-gray-100); padding: 40px 48px; border-radius: var(--radius-12); display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-gray-400); margin-bottom: 8px;">Em fundo claro</span>
+          <div class="tagline tagline--dark">
+            <span class="tagline__dot"></span>
+            <span class="tagline__text">Marketing 360</span>
+          </div>
+          <div class="tagline tagline--dark">
+            <span class="tagline__dot"></span>
+            <span class="tagline__text">Nossos serviços</span>
+          </div>
+          <div class="tagline tagline--dark">
+            <span class="tagline__dot"></span>
+            <span class="tagline__text">Sobre nós</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. CARD DEPOIMENTO -->
+    <section class="sg-section" id="depoimento">
+      <div class="sg-section__header">
+        <span class="sg-section__number">14</span>
+        <h2 class="sg-section__title">Card Depoimento</h2>
+      </div>
+      <div class="sg-section__body" style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start;">
+
+        <!-- Variante: Iniciais -->
+        <div class="card-depoimento">
+          <div class="card-depoimento__inner">
+            <div class="card-depoimento__header">
+              <div class="card-depoimento__avatar">
+                <span class="card-depoimento__initials">FL</span>
+              </div>
+              <div class="card-depoimento__info">
+                <span class="card-depoimento__name">Fernanda Lima</span>
+                <span class="card-depoimento__role">CEO, Studio Verde</span>
+              </div>
+            </div>
+            <p class="card-depoimento__quote">Lorem ipsum dolor sit amet consectetur. Ultrices feugiat duis sed leo. Sociis magnis nulla mattis eget. In magna vel aenean diam enim in diam libero tellus. Sit in eget est volutpat semper.</p>
+          </div>
+        </div>
+
+        <!-- Variante: Foto -->
+        <div class="card-depoimento">
+          <div class="card-depoimento__inner">
+            <div class="card-depoimento__header">
+              <div class="card-depoimento__avatar">
+                <img src="assets/Avatar.png" alt="Avatar">
+              </div>
+              <div class="card-depoimento__info">
+                <span class="card-depoimento__name">Carlos Mendes</span>
+                <span class="card-depoimento__role">Diretor de Marketing, Nexus</span>
+              </div>
+            </div>
+            <p class="card-depoimento__quote">Lorem ipsum dolor sit amet consectetur. Ultrices feugiat duis sed leo. Sociis magnis nulla mattis eget. In magna vel aenean diam enim in diam libero tellus. Sit in eget est volutpat semper.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 15. FOOTER -->
+    <section class="sg-section" id="footer">
+      <div class="sg-section__header">
+        <span class="sg-section__number">15</span>
+        <h2 class="sg-section__title">Footer</h2>
+      </div>
+      <div class="sg-section__body" style="padding: 0;">
+        <footer class="site-footer">
+          <!-- Vetor decorativo de fundo -->
+          <div class="site-footer__decor" aria-hidden="true">
+            <img src="assets/01. Home/logo-footer.svg" alt="">
+          </div>
+
+          <div class="site-footer__content">
+            <!-- Row principal -->
+            <div class="site-footer__row">
+              <a href="/" class="site-footer__logo">
+                <img src="assets/logo-navbar.svg" alt="Agência Luka">
+              </a>
+              <div class="site-footer__cols">
+                <!-- Explore -->
+                <div class="site-footer__col">
+                  <div class="tagline">
+                    <span class="tagline__dot"></span>
+                    <span class="tagline__text">Explore</span>
+                  </div>
+                  <nav class="site-footer__nav">
+                    <a href="#" class="site-footer__link">Sobre</a>
+                    <a href="#" class="site-footer__link">Serviços</a>
+                    <a href="#" class="site-footer__link">Iniciativas</a>
+                    <a href="#" class="site-footer__link">Contato</a>
+                  </nav>
+                </div>
+                <!-- Siga-nos -->
+                <div class="site-footer__col">
+                  <div class="tagline">
+                    <span class="tagline__dot"></span>
+                    <span class="tagline__text">Siga-nos</span>
+                  </div>
+                  <nav class="site-footer__nav">
+                    <a href="#" class="site-footer__link">Instagram</a>
+                    <a href="#" class="site-footer__link">Facebook</a>
+                    <a href="#" class="site-footer__link">LinkedIn</a>
+                    <a href="#" class="site-footer__link">Pinterest</a>
+                  </nav>
+                </div>
+                <!-- Contate-nos -->
+                <div class="site-footer__col">
+                  <div class="tagline">
+                    <span class="tagline__dot"></span>
+                    <span class="tagline__text">Contate-nos</span>
+                  </div>
+                  <nav class="site-footer__nav">
+                    <a href="tel:+5511900000000" class="site-footer__link">(11) 90000-0000</a>
+                    <a href="mailto:contato@luka.com.br" class="site-footer__link">contato@luka.com.br</a>
+                  </nav>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="site-footer__bottom">
+              <span class="site-footer__copy">© 2026 Luka Produções. Todos os direitos reservados.</span>
+              <a href="#" class="site-footer__privacy">Política de Privacidade</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <!-- 16. SERVICE ITEM -->
+    <section class="sg-section" id="service-item">
+      <div class="sg-section__header">
+        <span class="sg-section__number">16</span>
+        <h2 class="sg-section__title">Service Item</h2>
+      </div>
+      <div class="sg-section__body" style="background: var(--color-white); padding: 0 80px; overflow-x: auto;">
+        <div style="min-width: 1100px;">
+
+        <!-- Item 01 — Branding -->
+        <div class="service-item">
+          <div class="service-item__left">
+            <span class="service-item__number">[ 01 ]</span>
+            <div class="service-item__title-group">
+              <h3 class="service-item__title">Branding</h3>
+              <div class="service-item__arrow" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.666M10.833 5.833 15 10l-4.167 4.167" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="service-item__right">
+            <p class="service-item__body">Lorem ipsum dolor sit amet consectetur. Maecenas quam arcu nibh nulla. Lorem imperdiet curabitur tempus neque. Mauris euismod lacus ornare consectetur. Laoreet potenti nascetur odio viverra commodo lobortis ultricies auctor.</p>
+            <div class="service-item__icon-wrap">
+              <div class="service-item__icon">
+                <svg class="service-item__svg" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="service-item__icon-path" d="M25 50C11.22 50 0 38.7908 0 25C0 11.2091 11.2092 0 25 0C38.7908 0 50 11.2091 50 25C50 38.7908 38.7908 50 25 50ZM17.8105 47.8104C19.9129 48.4749 22.146 48.8562 24.4553 48.9107V1.11111C22.146 1.16557 19.9129 1.54684 17.8105 2.21133V47.8214V47.8104ZM25.5447 1.11111V48.9107C27.854 48.8562 30.0871 48.4749 32.1895 47.8104V2.20043C30.0871 1.53594 27.854 1.15468 25.5447 1.10021V1.11111ZM33.268 39.9891V47.4401C35.0218 46.7974 36.6667 45.9477 38.2026 44.9237L33.268 39.9891ZM11.7865 44.9237C13.3224 45.9368 14.9673 46.7865 16.7211 47.4401V39.9891L11.7865 44.9237ZM33.268 38.4532L39.1068 44.2919C40.9041 42.9739 42.5054 41.4161 43.8671 39.6623L35.4575 31.2527L33.268 33.4423V38.4532ZM6.11111 39.6623C7.47277 41.4161 9.08497 42.9739 10.8715 44.2919L16.7102 38.4532V29.0632L6.11111 39.6623ZM36.2309 30.4793L44.5316 38.78C45.8715 36.8845 46.939 34.793 47.6906 32.5381L40.9259 25.7734L36.2309 30.4684V30.4793ZM2.29847 32.5381C3.05011 34.7821 4.11765 36.8845 5.45752 38.78L16.7211 27.5163V18.1264L2.30937 32.5381H2.29847ZM33.268 22.5054V31.8954L47.6797 17.4837C46.939 15.2396 45.8606 13.1373 44.5207 11.2418L33.2571 22.5054H33.268ZM41.6993 25.0109L48.0501 31.3616C48.6057 29.3355 48.9107 27.2113 48.9107 25.0109C48.9107 22.8105 48.6166 20.6863 48.0501 18.6601L41.6993 25.0109ZM1.939 18.6601C1.38344 20.6863 1.07843 22.8105 1.07843 25.0109C1.07843 27.2113 1.37255 29.3355 1.939 31.3616L8.28976 25.0109L1.939 18.6601ZM2.29847 17.4837L9.05229 24.2484L13.7473 19.5534L5.44662 11.2527C4.10675 13.1481 3.03922 15.2396 2.28758 17.4946L2.29847 17.4837ZM33.268 11.5686V20.9586L43.8671 10.3595C42.5054 8.60566 40.8932 7.04792 39.1068 5.72984L33.268 11.5686ZM6.11111 10.3595L14.5207 18.7691L16.7102 16.5795V11.5686L10.8715 5.72984C9.07407 7.04792 7.47277 8.60566 6.11111 10.3595ZM33.268 2.58169V10.0327L38.2026 5.09804C36.6667 4.07407 35.0218 3.23529 33.268 2.58169ZM11.7865 5.08714L16.7211 10.0218V2.5708C14.9673 3.2135 13.3115 4.06318 11.7865 5.08714Z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 02 — Mídias Sociais -->
+        <div class="service-item">
+          <div class="service-item__left">
+            <span class="service-item__number">[ 02 ]</span>
+            <div class="service-item__title-group">
+              <h3 class="service-item__title">Mídias Sociais</h3>
+              <div class="service-item__arrow" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.666M10.833 5.833 15 10l-4.167 4.167" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="service-item__right">
+            <p class="service-item__body">Lorem ipsum dolor sit amet consectetur. Maecenas quam arcu nibh nulla. Lorem imperdiet curabitur tempus neque. Mauris euismod lacus ornare consectetur. Laoreet potenti nascetur odio viverra commodo lobortis ultricies auctor.</p>
+            <div class="service-item__icon-wrap">
+              <div class="service-item__icon">
+                <svg class="service-item__svg" width="51" height="50" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="service-item__icon-path" d="M50.2681 50H0V39.0651H50.2681V50ZM1.16577 48.8342H49.1024V40.2309H1.16577V48.8342ZM50.2681 30.4733H0V19.5384H50.2681V30.4733ZM1.16577 29.3075H49.1024V20.7041H1.16577V29.3075ZM50.2681 10.935H0V0H50.2681V10.935ZM1.16577 9.76919H49.1024V1.16577H1.16577V9.76919Z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 03 — Fotografia -->
+        <div class="service-item" style="border-bottom: none;">
+          <div class="service-item__left">
+            <span class="service-item__number">[ 03 ]</span>
+            <div class="service-item__title-group">
+              <h3 class="service-item__title">Fotografia</h3>
+              <div class="service-item__arrow" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4.167 10h11.666M10.833 5.833 15 10l-4.167 4.167" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="service-item__right">
+            <p class="service-item__body">Lorem ipsum dolor sit amet consectetur. Maecenas quam arcu nibh nulla. Lorem imperdiet curabitur tempus neque. Mauris euismod lacus ornare consectetur. Laoreet potenti nascetur odio viverra commodo lobortis ultricies auctor.</p>
+            <div class="service-item__icon-wrap">
+              <div class="service-item__icon">
+                <svg class="service-item__svg" width="44" height="50" viewBox="0 0 44 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="service-item__icon-path" d="M21.6791 49.9908L21.4559 49.7696L0 37.2166L0.0837032 36.9124L0.316212 12.2212L0.623124 12.1382L22.3209 0L22.5441 0.221198L44 12.7742L43.9163 13.0783L43.6838 37.7696L43.3769 37.8525L21.6791 50V49.9908ZM8.09131 35.023L21.8558 48.7558L39.5544 38.8479L23.5113 43.0507L9.64447 29.3088L8.10061 35.023H8.09131ZM1.16255 36.7465L18.6658 46.9862L6.97527 35.318L12.0533 16.5438L6.28704 18.0737L1.16255 36.7558V36.7465ZM19.5866 37.7604L23.8089 41.9447L42.6887 36.9954L42.884 16.8479L38.5314 32.7189L19.5866 37.7512V37.7604ZM9.93278 28.2028L18.7681 36.9585L30.8307 33.7512L34.0672 21.7972L25.2319 13.0415L13.1693 16.2488L9.93278 28.2028ZM25.3342 3.00461L37.0247 14.6728L31.9467 33.447L37.713 31.9171L42.8375 13.235L25.3342 3.00461ZM1.31135 12.9862L1.11604 33.1336L5.46861 17.2627L24.4134 12.2304L20.1911 8.04608L1.31135 12.9862ZM20.498 6.94009L34.3648 20.682L35.9087 14.9677L22.1442 1.23502L4.44557 11.1429L20.4887 6.94009H20.498Z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div><!-- /min-width wrapper -->
+      </div>
+    </section>
+
+    <!-- 17. LAYOUT GRID -->
+    <section class="sg-section" id="layout-grid">
+      <div class="sg-section__header">
+        <span class="sg-section__number">17</span>
+        <h2 class="sg-section__title">Layout Grid</h2>
+      </div>
+      <div class="sg-section__body">
+        <p class="text-small" style="color:var(--color-gray-600); margin-bottom: var(--space-40);">Extraído do Figma (nós 2001:44 · 2001:46 · 4002:472). Azul = coluna · Verde = gutter · Laranja = margin.</p>
+
+        <div class="sg-grid-demo">
+
+          <!-- Desktop 1440px -->
+          <div class="sg-grid-demo__breakpoint">
+            <div style="display:flex; align-items:center; gap:var(--space-16); flex-wrap:wrap;">
+              <span style="font-size:var(--font-size-medium); font-weight:var(--font-weight-semibold); color:var(--color-dark);">Desktop</span>
+              <span style="font-size:var(--font-size-tiny); color:var(--color-gray-400); font-family:monospace;">1440px · 12 colunas · gutter 24px · margin 80px · CENTER</span>
+            </div>
+            <div class="sg-grid-frame" id="grid-desktop"></div>
+            <div class="sg-grid-specs">
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Largura</span>
+                <span class="sg-grid-spec-item__value">1440px</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Colunas</span>
+                <span class="sg-grid-spec-item__value">12</span>
+                <span class="sg-grid-spec-item__token">--grid-cols-desktop</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Gutter</span>
+                <span class="sg-grid-spec-item__value">24px</span>
+                <span class="sg-grid-spec-item__token">--grid-gutter-desktop</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Margin</span>
+                <span class="sg-grid-spec-item__value">80px</span>
+                <span class="sg-grid-spec-item__token">--grid-margin-desktop</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Alinhamento</span>
+                <span class="sg-grid-spec-item__value">CENTER</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sg-divider"></div>
+
+          <!-- Tablet 768px -->
+          <div class="sg-grid-demo__breakpoint">
+            <div style="display:flex; align-items:center; gap:var(--space-16); flex-wrap:wrap;">
+              <span style="font-size:var(--font-size-medium); font-weight:var(--font-weight-semibold); color:var(--color-dark);">Tablet</span>
+              <span style="font-size:var(--font-size-tiny); color:var(--color-gray-400); font-family:monospace;">768px · 8 colunas · gutter 24px · margin 32px · STRETCH</span>
+            </div>
+            <div class="sg-grid-frame" id="grid-tablet" style="max-width: 600px;"></div>
+            <div class="sg-grid-specs">
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Largura</span>
+                <span class="sg-grid-spec-item__value">768px</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Colunas</span>
+                <span class="sg-grid-spec-item__value">8</span>
+                <span class="sg-grid-spec-item__token">--grid-cols-tablet</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Gutter</span>
+                <span class="sg-grid-spec-item__value">24px</span>
+                <span class="sg-grid-spec-item__token">--grid-gutter-tablet</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Margin</span>
+                <span class="sg-grid-spec-item__value">32px</span>
+                <span class="sg-grid-spec-item__token">--grid-margin-tablet</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Alinhamento</span>
+                <span class="sg-grid-spec-item__value">STRETCH</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="sg-divider"></div>
+
+          <!-- Mobile 393px -->
+          <div class="sg-grid-demo__breakpoint">
+            <div style="display:flex; align-items:center; gap:var(--space-16); flex-wrap:wrap;">
+              <span style="font-size:var(--font-size-medium); font-weight:var(--font-weight-semibold); color:var(--color-dark);">Mobile</span>
+              <span style="font-size:var(--font-size-tiny); color:var(--color-gray-400); font-family:monospace;">393px · 4 colunas · gutter 16px · margin 24px · STRETCH</span>
+            </div>
+            <div class="sg-grid-frame" id="grid-mobile" style="max-width: 300px;"></div>
+            <div class="sg-grid-specs">
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Largura</span>
+                <span class="sg-grid-spec-item__value">393px</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Colunas</span>
+                <span class="sg-grid-spec-item__value">4</span>
+                <span class="sg-grid-spec-item__token">--grid-cols-mobile</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Gutter</span>
+                <span class="sg-grid-spec-item__value">16px</span>
+                <span class="sg-grid-spec-item__token">--grid-gutter-mobile</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Margin</span>
+                <span class="sg-grid-spec-item__value">24px</span>
+                <span class="sg-grid-spec-item__token">--grid-margin-mobile</span>
+              </div>
+              <div class="sg-grid-spec-item">
+                <span class="sg-grid-spec-item__label">Alinhamento</span>
+                <span class="sg-grid-spec-item__value">STRETCH</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /sg-grid-demo -->
+
+        <!-- Legenda -->
+        <div class="sg-grid-legend">
+          <div class="sg-grid-legend-item">
+            <div class="sg-grid-legend-color" style="background:rgba(30,58,138,0.1); border:1px solid rgba(30,58,138,0.3);"></div>
+            Coluna
+          </div>
+          <div class="sg-grid-legend-item">
+            <div class="sg-grid-legend-color" style="background:rgba(16,185,129,0.12); border:1px dashed rgba(16,185,129,0.6);"></div>
+            Gutter (gap entre colunas)
+          </div>
+          <div class="sg-grid-legend-item">
+            <div class="sg-grid-legend-color" style="background:rgba(249,115,22,0.1); border:1px dashed rgba(249,115,22,0.6);"></div>
+            Margin (offset lateral)
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Layout Grid — renderização visual das grids
+    function buildGrid(containerId, cols, gutterPx, marginPx) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const W = container.offsetWidth;
+      const marginW = (marginPx / W) * 100;
+      const gutterW = (gutterPx / W) * 100;
+
+      // Calcular largura real de cada coluna
+      const totalGutterPx = gutterPx * (cols - 1);
+      const totalMarginPx = marginPx * 2;
+      const colPx = (W - totalGutterPx - totalMarginPx) / cols;
+      const colW = (colPx / W) * 100;
+
+      const inner = document.createElement('div');
+      inner.className = 'sg-grid-inner';
+
+      // Margin esquerda
+      const mL = document.createElement('div');
+      mL.className = 'sg-grid-margin';
+      mL.style.width = marginW + '%';
+      mL.innerHTML = `<span>${marginPx}px</span>`;
+      inner.appendChild(mL);
+
+      // Colunas + gutters
+      const colsWrap = document.createElement('div');
+      colsWrap.className = 'sg-grid-cols';
+
+      for (let i = 0; i < cols; i++) {
+        const col = document.createElement('div');
+        col.className = 'sg-grid-col';
+        col.style.width = colW + '%';
+        col.innerHTML = `<span>${i + 1}</span>`;
+        colsWrap.appendChild(col);
+
+        if (i < cols - 1) {
+          const gut = document.createElement('div');
+          gut.className = 'sg-grid-gutter';
+          gut.style.width = gutterW + '%';
+          gut.innerHTML = `<span>${gutterPx}px</span>`;
+          colsWrap.appendChild(gut);
+        }
+      }
+
+      inner.appendChild(colsWrap);
+
+      // Margin direita
+      const mR = document.createElement('div');
+      mR.className = 'sg-grid-margin sg-grid-margin--right';
+      mR.style.width = marginW + '%';
+      mR.innerHTML = `<span>${marginPx}px</span>`;
+      inner.appendChild(mR);
+
+      container.appendChild(inner);
+    }
+
+    buildGrid('grid-desktop', 12, 24, 80);
+    buildGrid('grid-tablet',   8, 24, 32);
+    buildGrid('grid-mobile',   4, 16, 24);
+
+    document.querySelectorAll('.faq-item__trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.faq-item');
+        const isOpen = item.classList.contains('is-open');
+        item.classList.toggle('is-open', !isOpen);
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+  </script>
+</body>
+</html>
