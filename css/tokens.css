@@ -140,7 +140,7 @@
   --radius-full: 9999px;
 
   /* ── LAYOUT GRID (extraído do Figma) ────────
-     Desktop  1440px: 12 cols · gutter 24px · margin 80px (CENTER)
+     Desktop  1440px: 12 cols · 80px/col · gutter 24px · margin 108px (CENTER)
      Tablet    768px:  8 cols · gutter 24px · margin 32px (STRETCH)
      Mobile    393px:  4 cols · gutter 16px · margin 24px (STRETCH)
   ─────────────────────────────────────────── */
@@ -152,7 +152,7 @@
   --grid-gutter-tablet:  24px;
   --grid-gutter-mobile:  16px;
 
-  --grid-margin-desktop: 80px;
+  --grid-margin-desktop: 108px;
   --grid-margin-tablet:  32px;
   --grid-margin-mobile:  24px;
 
