@@ -637,6 +637,17 @@
 </head>
 <body class="sg-body">
 
+  <!-- Loading Screen (exibido apenas no primeiro carregamento da sessão) -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-screen__watermark" aria-hidden="true"></div>
+    <div class="loading-screen__content">
+      <img class="loading-screen__logo" src="assets/01. Home/loading-logo.svg" alt="Luka">
+    </div>
+    <div class="loading-screen__progress">
+      <div class="loading-screen__progress-bar"></div>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="sg-header">
     <p class="overline">Design System</p>
@@ -663,6 +674,9 @@
     <a href="#footer">Footer</a>
     <a href="#service-item">Service Item</a>
     <a href="#layout-grid">Layout Grid</a>
+    <a href="#marquee">Marquee</a>
+    <a href="#menu">Menu</a>
+    <a href="#loading">Loading Screen</a>
   </nav>
 
   <main class="sg-content">
@@ -1728,9 +1742,173 @@
       </div>
     </section>
 
+    <!-- 18. MARQUEE -->
+    <section class="sg-section" id="marquee">
+      <div class="sg-section__header">
+        <span class="sg-section__number">18</span>
+        <h2 class="sg-section__title">Marquee</h2>
+      </div>
+      <div class="sg-section__body">
+        <div class="marquee">
+          <div class="marquee__track">
+            <div class="marquee__group">
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt="Logo cliente"></div>
+            </div>
+            <div class="marquee__group" aria-hidden="true">
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+              <div class="marquee__item"><img src="assets/01. Home/logo-marquee.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19. MENU -->
+    <section class="sg-section" id="menu">
+      <div class="sg-section__header">
+        <span class="sg-section__number">19</span>
+        <h2 class="sg-section__title">Menu</h2>
+      </div>
+      <div class="sg-section__body">
+        <p class="text-small" style="color:var(--color-gray-600); margin-bottom: var(--space-24);">Clique em <strong>[ Menu ]</strong> para abrir o painel. O texto do botão alterna para <strong>[ Fechar ]</strong> com transição suave.</p>
+
+        <div class="menu-demo">
+          <header class="site-header">
+            <span class="site-header__copyright">&copy; <span data-year></span></span>
+            <a href="#" class="site-header__logo">
+              <img src="assets/logo-navbar.svg" alt="Agência Luka">
+            </a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-overlay">
+              <span class="menu-toggle__label">
+                <span class="menu-toggle__open">[ Menu ]</span>
+                <span class="menu-toggle__close">[ Fechar ]</span>
+              </span>
+            </button>
+          </header>
+
+          <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+            <nav class="menu-overlay__nav">
+              <div class="menu-overlay__item">
+                <span class="menu-overlay__index">[ 01 ]</span>
+                <a href="#" class="menu-overlay__link">Home</a>
+              </div>
+              <div class="menu-overlay__item">
+                <span class="menu-overlay__index">[ 02 ]</span>
+                <a href="#" class="menu-overlay__link">Sobre</a>
+              </div>
+              <div class="menu-overlay__item">
+                <span class="menu-overlay__index">[ 03 ]</span>
+                <a href="#" class="menu-overlay__link">Serviços</a>
+              </div>
+              <div class="menu-overlay__item">
+                <span class="menu-overlay__index">[ 04 ]</span>
+                <a href="#" class="menu-overlay__link">Cases</a>
+              </div>
+              <div class="menu-overlay__item">
+                <span class="menu-overlay__index">[ 05 ]</span>
+                <a href="#" class="menu-overlay__link">Iniciativas</a>
+              </div>
+              <div class="menu-overlay__item">
+                <span class="menu-overlay__index">[ 06 ]</span>
+                <a href="#" class="menu-overlay__link">Contato</a>
+              </div>
+            </nav>
+
+            <div class="menu-overlay__footer">
+              <div class="menu-overlay__social">
+                <a href="#" aria-label="Instagram" style="--icon: url('/assets/icon-instagram.svg')"><img src="assets/icon-instagram.svg" alt="" width="16" height="16"></a>
+                <a href="#" aria-label="LinkedIn" style="--icon: url('/assets/icon-linkedin.svg')"><img src="assets/icon-linkedin.svg" alt="" width="16" height="16"></a>
+                <a href="#" aria-label="Facebook" style="--icon: url('/assets/icon-facebook.svg')"><img src="assets/icon-facebook.svg" alt="" width="16" height="16"></a>
+                <a href="#" aria-label="Pinterest" style="--icon: url('/assets/icon-pinterest.svg')"><img src="assets/icon-pinterest.svg" alt="" width="16" height="16"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 20. LOADING SCREEN -->
+    <section class="sg-section" id="loading">
+      <div class="sg-section__header">
+        <span class="sg-section__number">20</span>
+        <h2 class="sg-section__title">Loading Screen</h2>
+      </div>
+      <div class="sg-section__body">
+        <p class="text-small" style="color:var(--color-gray-600); margin-bottom: var(--space-24);">Exibida apenas no <strong>primeiro carregamento do site na sessão</strong> (controlado via <code>sessionStorage</code>) — não reaparece em navegações entre páginas. Logo "luka" branco centralizado, marca d'água do wordmark ao fundo e barra de progresso com gradiente laranja → violeta.</p>
+
+        <div class="loading-demo">
+          <div class="loading-screen" id="loading-screen-demo">
+            <div class="loading-screen__watermark" aria-hidden="true"></div>
+            <div class="loading-screen__content">
+              <img class="loading-screen__logo" src="assets/01. Home/loading-logo.svg" alt="Luka">
+            </div>
+            <div class="loading-screen__progress">
+              <div class="loading-screen__progress-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn--secondary btn--sm" id="loading-demo-replay" style="margin-top: var(--space-24);">Repetir animação</button>
+      </div>
+    </section>
+
   </main>
 
   <script>
+    // Loading screen — exibida apenas no primeiro carregamento da sessão
+    (function () {
+      const loadingScreen = document.getElementById('loading-screen');
+      if (!loadingScreen) return;
+
+      if (sessionStorage.getItem('lukaLoaded')) {
+        loadingScreen.remove();
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        loadingScreen.classList.add('is-loading');
+      });
+
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          loadingScreen.classList.add('is-hidden');
+          sessionStorage.setItem('lukaLoaded', '1');
+          loadingScreen.addEventListener('transitionend', () => loadingScreen.remove(), { once: true });
+        }, 1700);
+      });
+    })();
+
+    // Demo da Loading Screen — botão "Repetir animação"
+    const loadingDemo = document.getElementById('loading-screen-demo');
+    const loadingDemoReplay = document.getElementById('loading-demo-replay');
+
+    if (loadingDemo && loadingDemoReplay) {
+      const playLoadingDemo = () => {
+        loadingDemo.classList.remove('is-loading');
+        void loadingDemo.offsetWidth; // reinicia a transição
+        loadingDemo.classList.add('is-loading');
+      };
+
+      playLoadingDemo();
+      loadingDemoReplay.addEventListener('click', playLoadingDemo);
+    }
+
+    // Ano atual no copyright
+    document.querySelectorAll('[data-year]').forEach(el => {
+      el.textContent = new Date().getFullYear();
+    });
+
     // Layout Grid — renderização visual das grids
     function buildGrid(containerId, cols, gutterPx, marginPx) {
       const container = document.getElementById(containerId);
@@ -1799,6 +1977,27 @@
         trigger.setAttribute('aria-expanded', String(!isOpen));
       });
     });
+
+    // Menu overlay
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    if (menuToggle && menuOverlay) {
+      menuToggle.addEventListener('click', () => {
+        const isOpen = document.body.classList.toggle('menu-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuOverlay.setAttribute('aria-hidden', String(!isOpen));
+      });
+
+      menuOverlay.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.body.classList.remove('menu-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuOverlay.setAttribute('aria-hidden', 'true');
+        });
+      });
+    }
   </script>
 </body>
 </html>
