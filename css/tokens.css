@@ -157,7 +157,7 @@
   --grid-margin-mobile:  24px;
 
   /* ── CONTAINER ───────────────────────────── */
-  --container-max:     1440px;
+  --container-max: 1440px;
   --container-padding: var(--grid-margin-desktop);
 
   /* ── SOMBRAS ─────────────────────────────── */
