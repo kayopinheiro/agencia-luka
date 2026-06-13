@@ -374,10 +374,10 @@ select.input {
 .faq-item__trigger {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-24);
-  padding: var(--space-32);
+  padding: var(--space-24);
   cursor: pointer;
   background: none;
   border: none;
@@ -433,7 +433,98 @@ select.input {
   font-size: var(--font-size-small);
   color: var(--color-gray-700);
   line-height: var(--line-height-loose);
-  padding: 0 var(--space-32) var(--space-32);
+  padding: 0 var(--space-24) var(--space-24);
+}
+
+.faq__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-80);
+}
+
+.faq__col--info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 0 1 496px;
+  height: 576px;
+}
+
+.faq__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.faq__title {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: -0.24px;
+  color: var(--color-dark);
+}
+
+.faq__desc {
+  font-size: var(--font-size-regular);
+  color: var(--color-gray-700);
+  line-height: var(--line-height-loose);
+}
+
+.faq__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.faq__image {
+  border: 1px solid var(--color-blue-50);
+  border-radius: var(--radius-12);
+  padding: var(--space-4);
+}
+
+.faq__image img {
+  display: block;
+  width: 100%;
+  height: 328px;
+  object-fit: cover;
+  border-radius: var(--radius-8);
+}
+
+.faq__col--list {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+@media (max-width: 1024px) {
+  .faq__row {
+    flex-direction: column;
+    gap: var(--space-48);
+  }
+
+  .faq__col--info {
+    flex: 1 1 auto;
+    height: auto;
+    gap: var(--space-32);
+  }
+}
+
+@media (max-width: 768px) {
+  .faq__title {
+    font-size: var(--font-size-h3);
+  }
+}
+
+@media (min-width: 1025px) {
+  .faq-item__trigger {
+    padding: var(--space-32);
+  }
+
+  .faq-item__answer {
+    padding: 0 var(--space-32) var(--space-32);
+  }
 }
 
 /* ── TAGLINE ─────────────────────────────── */
