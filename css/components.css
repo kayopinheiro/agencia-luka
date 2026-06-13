@@ -2186,6 +2186,7 @@ body.menu-open .menu-overlay__footer {
 /* ── CTA ─────────────────────────────────── */
 .cta {
   padding: var(--space-8);
+  background-color: var(--color-brand-blue);
 }
 
 .cta__frame {
