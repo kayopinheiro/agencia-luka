@@ -194,8 +194,6 @@ h6, .h6 {
 /* Mobile — 393px: 4 cols · gutter 16px · margin 24px */
 @media (max-width: 768px) {
   :root {
-    --font-size-display: var(--font-size-display-mobile);
-    --font-size-h1: var(--font-size-h1-mobile);
     --container-padding: var(--grid-margin-mobile);
   }
   .grid-layout {

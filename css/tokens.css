@@ -14,6 +14,9 @@
   --color-dark:         #1a1a1a;
   --color-white:        #ffffff;
 
+  /* ── GRADIENTES ──────────────────────────── */
+  --gradient-icon: linear-gradient(225deg, var(--color-blue-50) 0%, #c6cfea 100%);
+
   /* ── ESCALA BLUE ─────────────────────────── */
   --color-blue-50:  #e9ebf8;
   --color-blue-100: #b9c2db;
@@ -77,17 +80,18 @@
   /* ── TIPOGRAFIA ──────────────────────────── */
   --font-family: 'Poppins', sans-serif;
 
-  --font-size-display: 72px;
-  --font-size-h1:      56px;
-  --font-size-h2:      48px;
-  --font-size-h3:      40px;
-  --font-size-h4:      32px;
-  --font-size-h5:      26px;
-  --font-size-h6:      22px;
-  --font-size-large:   20px;
-  --font-size-medium:  18px;
-  --font-size-regular: 16px;
-  --font-size-small:   14px;
+  /* Escala fluida: interpola entre 390px (mobile) e 1440px (desktop) */
+  --font-size-display: clamp(48px, 39.09px + 2.29vw, 72px);
+  --font-size-h1:      clamp(40px, 34.06px + 1.52vw, 56px);
+  --font-size-h2:      clamp(32px, 26.06px + 1.52vw, 48px);
+  --font-size-h3:      clamp(28px, 23.54px + 1.14vw, 40px);
+  --font-size-h4:      clamp(24px, 21.03px + 0.76vw, 32px);
+  --font-size-h5:      clamp(20px, 17.77px + 0.57vw, 26px);
+  --font-size-h6:      clamp(18px, 16.51px + 0.38vw, 22px);
+  --font-size-large:   clamp(18px, 17.26px + 0.19vw, 20px);
+  --font-size-medium:  clamp(16px, 15.26px + 0.19vw, 18px);
+  --font-size-regular: clamp(15px, 14.63px + 0.10vw, 16px);
+  --font-size-small:   clamp(13px, 12.63px + 0.10vw, 14px);
   --font-size-tiny:    12px;
 
   --font-weight-regular:  400;
@@ -105,10 +109,6 @@
   --letter-spacing-tighter:  -0.004em;
   --letter-spacing-normal:   0em;
   --letter-spacing-wide:     0.08em;
-
-  /* Tipografia mobile */
-  --font-size-display-mobile: 48px;
-  --font-size-h1-mobile:      40px;
 
   /* ── ESPAÇAMENTOS ────────────────────────── */
   --space-0:   0px;
