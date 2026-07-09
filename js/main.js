@@ -46,17 +46,27 @@ const menuToggle = document.querySelector('.menu-toggle');
 const menuOverlay = document.querySelector('.menu-overlay');
 
 if (menuToggle && menuOverlay) {
-  menuToggle.addEventListener('click', () => {
-    const isOpen = document.body.classList.toggle('menu-open');
+  const setMenuOpen = (isOpen) => {
+    document.documentElement.classList.toggle('menu-open', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
     menuToggle.setAttribute('aria-expanded', String(isOpen));
     menuOverlay.setAttribute('aria-hidden', String(!isOpen));
+  };
+
+  menuToggle.addEventListener('click', () => {
+    setMenuOpen(!document.body.classList.contains('menu-open'));
   });
 
   menuOverlay.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.body.classList.remove('menu-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-      menuOverlay.setAttribute('aria-hidden', 'true');
-    });
+    link.addEventListener('click', () => setMenuOpen(false));
+  });
+
+  document.addEventListener('click', (event) => {
+    const isOpen = document.body.classList.contains('menu-open');
+    const clickedInsideMenu = menuOverlay.contains(event.target) || menuToggle.contains(event.target);
+
+    if (isOpen && !clickedInsideMenu) {
+      setMenuOpen(false);
+    }
   });
 }

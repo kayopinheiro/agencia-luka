@@ -1322,6 +1322,11 @@ select.input {
 }
 
 /* ── HEADER & MENU OVERLAY ───────────────── */
+html.menu-open,
+body.menu-open {
+  overflow: hidden;
+}
+
 .site-header {
   position: relative;
   z-index: 210;
