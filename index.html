@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
+  <noscript><style>[data-reveal], [data-reveal="stagger"] > * { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body>
 
@@ -26,7 +27,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero__inner">
-      <div class="hero__bg" style="background-image: url('assets/img-hero-home.png')" aria-hidden="true"></div>
+      <div class="hero__bg" style="background-image: url('assets/img-hero-home.png')" aria-hidden="true" data-reveal="zoom"></div>
       <div class="hero__overlay" aria-hidden="true"></div>
 
       <!-- HEADER -->
@@ -93,7 +94,7 @@
         <img class="hero__crosshair hero__crosshair--br" src="assets/sinal-de-mais.svg" alt="">
       </div>
 
-      <div class="hero__content">
+      <div class="hero__content" data-reveal="stagger">
         <div class="hero__main">
           <span class="hero__eyebrow">
             <span class="hero__eyebrow-dot" aria-hidden="true"></span>
@@ -113,7 +114,7 @@
         </div>
       </div>
 
-      <div class="hero__footer">
+      <div class="hero__footer" data-reveal="fade-up">
         <a href="#solucoes" class="hero__scroll">
           Saiba mais
           <img src="assets/arrow_downward_alt.svg" alt="" width="20" height="20">
@@ -132,7 +133,7 @@
     <section class="section section--light sobre" id="sobre">
       <div class="container">
         <div class="sobre__row">
-          <div class="sobre__col sobre__col--media">
+          <div class="sobre__col sobre__col--media" data-reveal="fade-left">
             <div class="tagline tagline--dark">
               <span class="tagline__dot"></span>
               <span class="tagline__text">sobre nós</span>
@@ -141,7 +142,7 @@
               <img src="assets/img-sobre.png" alt="Mão segurando uma flor laranja">
             </div>
           </div>
-          <div class="sobre__col sobre__col--text">
+          <div class="sobre__col sobre__col--text" data-reveal="fade-up">
             <h2 class="sobre__title">Crescer no digital exige mais do que presença</h2>
             <div class="sobre__body">
               <p>A Luka nasce para ajudar marcas a se posicionarem com clareza e consistência no digital. Muitas empresas têm potencial, mas não conseguem traduzir isso em comunicação, identidade e resultado.</p>
@@ -152,7 +153,7 @@
           </div>
         </div>
 
-        <div class="marquee sobre__marquee">
+        <div class="marquee sobre__marquee" data-reveal="zoom">
           <div class="marquee__track">
             <div class="marquee__group">
               <div class="marquee__item"><img src="assets/logo-ge-healthcare.svg" alt="GE HealthCare"></div>
@@ -175,7 +176,7 @@
 
     <section class="section section--light solucoes" id="solucoes">
       <div class="container solucoes__content">
-        <div class="solucoes__header">
+        <div class="solucoes__header" data-reveal="stagger">
           <div class="solucoes__col solucoes__heading">
             <div class="tagline tagline--dark">
               <span class="tagline__dot"></span>
@@ -188,7 +189,7 @@
           </div>
         </div>
 
-        <div class="solucoes__list">
+        <div class="solucoes__list" data-reveal="stagger">
           <div class="solucoes__item">
             <div class="solucoes__item-left">
               <span class="solucoes__index">[ 01 ]</span>
@@ -197,7 +198,7 @@
             </div>
             <div class="solucoes__item-right">
               <p class="solucoes__desc">Criamos marcas com posicionamento claro e identidade consistente. Definimos direção estratégica, linguagem e percepção para fortalecer sua presença no mercado e gerar valor ao longo do tempo.</p>
-              <div class="solucoes__icon">
+              <div class="solucoes__icon" data-reveal="zoom">
                 <div class="solucoes__icon-inner">
                   <img src="assets/vector-branding.svg" alt="">
                 </div>
@@ -213,7 +214,7 @@
             </div>
             <div class="solucoes__item-right">
               <p class="solucoes__desc">Desenvolvemos sites com foco em clareza, usabilidade e conversão. Cada elemento é pensado para guiar o usuário e transformar visitas em oportunidades reais de negócio.</p>
-              <div class="solucoes__icon">
+              <div class="solucoes__icon" data-reveal="zoom">
                 <div class="solucoes__icon-inner">
                   <img src="assets/vector-web.svg" alt="">
                 </div>
@@ -229,7 +230,7 @@
             </div>
             <div class="solucoes__item-right">
               <p class="solucoes__desc">Planejamos conteúdos que conectam com o público e constroem autoridade. Trabalhamos consistência, mensagem e posicionamento para fortalecer a presença da marca no dia a dia.</p>
-              <div class="solucoes__icon">
+              <div class="solucoes__icon" data-reveal="zoom">
                 <div class="solucoes__icon-inner">
                   <img src="assets/vector/midias.svg" alt="">
                 </div>
@@ -245,7 +246,7 @@
             </div>
             <div class="solucoes__item-right">
               <p class="solucoes__desc">Criamos campanhas orientadas por dados para atrair as pessoas certas. Otimizamos continuamente para melhorar desempenho, reduzir custos e gerar resultados consistentes.</p>
-              <div class="solucoes__icon">
+              <div class="solucoes__icon" data-reveal="zoom">
                 <div class="solucoes__icon-inner">
                   <img src="assets/vector/trafego.svg" alt="">
                 </div>
@@ -261,7 +262,7 @@
             </div>
             <div class="solucoes__item-right">
               <p class="solucoes__desc">Produzimos imagens que reforçam a identidade da marca e elevam sua percepção. Cada detalhe é pensado para transmitir profissionalismo e valor em todos os pontos de contato.</p>
-              <div class="solucoes__icon">
+              <div class="solucoes__icon" data-reveal="zoom">
                 <div class="solucoes__icon-inner">
                   <img src="assets/vector/fotografia.svg" alt="">
                 </div>
@@ -279,20 +280,20 @@
         <div class="cases__container">
 
           <div class="cases__intro">
-            <div class="cases__header">
+            <div class="cases__header" data-reveal="fade-up">
               <div class="tagline">
                 <span class="tagline__dot"></span>
                 <span class="tagline__text">nossos cases</span>
               </div>
               <h2 class="cases__title">Estratégia que gera resultado</h2>
             </div>
-            <p class="cases__desc">Cada projeto é desenvolvido com um objetivo claro. Não criamos apenas peças visuais, mas soluções que fazem sentido para o seu negócio e para quem está do outro lado. Unimos estratégia, design e execução para construir uma presença digital mais forte, consistente e orientada a crescimento.</p>
+            <p class="cases__desc" data-reveal="fade-up">Cada projeto é desenvolvido com um objetivo claro. Não criamos apenas peças visuais, mas soluções que fazem sentido para o seu negócio e para quem está do outro lado. Unimos estratégia, design e execução para construir uma presença digital mais forte, consistente e orientada a crescimento.</p>
             <div class="cases__wordmark" aria-hidden="true">
               <img src="assets/vector-cases-wordmark.svg" alt="">
             </div>
           </div>
 
-          <div class="cases__list">
+          <div class="cases__list" data-reveal="stagger" data-reveal-variant="zoom">
 
             <a href="#" class="card-service">
               <div class="card-service__media">
@@ -378,7 +379,7 @@
     <!-- DEPOIMENTOS -->
     <section class="section section--light depoimentos" id="depoimentos">
       <div class="container depoimentos__content">
-        <div class="depoimentos__header">
+        <div class="depoimentos__header" data-reveal="fade-up">
           <div class="depoimentos__heading">
             <div class="tagline tagline--dark">
               <span class="tagline__dot"></span>
@@ -389,7 +390,7 @@
           <p class="depoimentos__desc">Experiências reais de quem confiou na Luka para construir, posicionar e crescer no digital.</p>
         </div>
 
-        <div class="depoimentos__grid">
+        <div class="depoimentos__grid" data-reveal="stagger" data-reveal-variant="zoom">
 
           <div class="card-depoimento">
             <div class="card-depoimento__inner">
@@ -503,7 +504,7 @@
     <section class="section section--light faq" id="faq">
       <div class="container faq__row">
         <div class="faq__col faq__col--info">
-          <div class="faq__text">
+          <div class="faq__text" data-reveal="fade-up">
             <div class="faq__heading">
               <div class="tagline tagline--dark">
                 <span class="tagline__dot"></span>
@@ -513,12 +514,12 @@
             </div>
             <p class="faq__desc">Trabalhamos com marcas que buscam crescer com consistência. Cada projeto é construído com estratégia, clareza e foco em resultado real.</p>
           </div>
-          <div class="faq__image">
+          <div class="faq__image" data-reveal="fade-left">
             <img src="assets/img-faq.png" alt="">
           </div>
         </div>
 
-        <div class="faq__col faq__col--list">
+        <div class="faq__col faq__col--list" data-reveal="stagger">
           <div class="faq-item">
             <button class="faq-item__trigger" aria-expanded="false">
               <span class="faq-item__question">Como funciona o processo de trabalho</span>
@@ -594,8 +595,8 @@
 
     <section class="cta" id="cta">
       <div class="cta__frame">
-        <img class="cta__bg" src="assets/img-contato.png" alt="">
-        <div class="cta__content">
+        <img class="cta__bg" src="assets/img-contato.png" alt="" data-reveal="zoom">
+        <div class="cta__content" data-reveal="zoom">
           <div class="cta__text">
             <div class="cta__heading">
               <div class="tagline">
@@ -624,7 +625,7 @@
     </div>
 
     <div class="site-footer__content">
-      <div class="site-footer__row">
+      <div class="site-footer__row" data-reveal="stagger">
         <a href="/" class="site-footer__logo">
           <img src="assets/logo-navbar.svg" alt="Agência Luka">
         </a>
@@ -673,6 +674,9 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/scroll-reveal.js"></script>
   <script src="js/main.js"></script>
   <script src="js/cases.js"></script>
   <script src="js/faq.js"></script>

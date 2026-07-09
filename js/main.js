@@ -5,10 +5,18 @@
 // Loading screen — exibida apenas no primeiro carregamento da sessão
 (function () {
   const loadingScreen = document.getElementById('loading-screen');
-  if (!loadingScreen) return;
+
+  // Dispara quando a tela de loading libera a view — o reveal do hero
+  // (js/scroll-reveal.js) escuta esse evento em vez de usar ScrollTrigger,
+  // já que o hero está sempre visível no load e não depende de scroll.
+  if (!loadingScreen) {
+    document.dispatchEvent(new CustomEvent('luka:loaded'));
+    return;
+  }
 
   if (sessionStorage.getItem('lukaLoaded')) {
     loadingScreen.remove();
+    document.dispatchEvent(new CustomEvent('luka:loaded'));
     return;
   }
 
@@ -20,7 +28,10 @@
     setTimeout(() => {
       loadingScreen.classList.add('is-hidden');
       sessionStorage.setItem('lukaLoaded', '1');
-      loadingScreen.addEventListener('transitionend', () => loadingScreen.remove(), { once: true });
+      loadingScreen.addEventListener('transitionend', () => {
+        loadingScreen.remove();
+        document.dispatchEvent(new CustomEvent('luka:loaded'));
+      }, { once: true });
     }, 1700);
   });
 })();
@@ -28,20 +39,6 @@
 // Ano atual no copyright
 document.querySelectorAll('[data-year]').forEach(el => {
   el.textContent = new Date().getFullYear();
-});
-
-// Scroll reveal
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('[data-reveal]').forEach(el => {
-  revealObserver.observe(el);
 });
 
 // Menu overlay

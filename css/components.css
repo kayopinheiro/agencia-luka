@@ -898,20 +898,26 @@ select.input {
   }
 }
 
-/* ── SCROLL REVEAL ───────────────────────── */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
-}
+/* ── SCROLL REVEAL (GSAP + ScrollTrigger) ──
+   O CSS define o estado inicial "escondido" por variante — evita flash de
+   conteúdo antes do JS carregar. O JS (js/scroll-reveal.js) anima até o
+   estado neutro (opacity:1, transform:none) quando o elemento entra na tela.
+   Estados finais nunca ficam só em CSS: quem os define é o GSAP.
+   ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="fade-up"],
+  [data-reveal="stagger"] > * {
+    opacity: 0;
+    transform: translateY(24px);
+  }
 
-[data-reveal="left"]  { transform: translateX(-32px); }
-[data-reveal="right"] { transform: translateX(32px); }
-[data-reveal="scale"] { transform: scale(0.95); }
+  [data-reveal="fade-left"]  { opacity: 0; transform: translateX(-32px); }
+  [data-reveal="fade-right"] { opacity: 0; transform: translateX(32px); }
+  [data-reveal="zoom"]       { opacity: 0; transform: scale(0.95); }
 
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: none;
+  [data-reveal="stagger"][data-reveal-variant="fade-left"]  > * { transform: translateX(-32px); }
+  [data-reveal="stagger"][data-reveal-variant="fade-right"] > * { transform: translateX(32px); }
+  [data-reveal="stagger"][data-reveal-variant="zoom"]        > * { transform: scale(0.95); }
 }
 
 /* ── MARQUEE ─────────────────────────────── */
