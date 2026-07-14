@@ -951,20 +951,29 @@ select.input {
 
 .marquee__item {
   flex-shrink: 0;
-  height: 36px;
+  height: 48px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .marquee__item img {
-  height: 100%;
+  /* Compensa a área de respiro variável de cada logo (algumas vêm com muita
+     margem interna no SVG, outras quase sem margem) para que o traço visível
+     tenha um peso óptico parecido no marquee, não a mesma altura de arquivo. */
+  height: calc(100% * var(--logo-scale, 1));
   width: auto;
+  max-height: 100px;
   display: block;
 }
 
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+.sobre__marquee .marquee__track {
+  animation-duration: 160s;
 }
 
 /* ── SOBRE ───────────────────────────────── */
