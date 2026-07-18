@@ -848,6 +848,12 @@ select.input {
   line-height: var(--line-height-loose);
 }
 
+.site-footer__legal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+}
+
 .site-footer__privacy {
   font-size: var(--font-size-tiny);
   font-weight: var(--font-weight-regular);
@@ -857,8 +863,15 @@ select.input {
   transition: opacity 300ms ease-out;
 }
 
-.site-footer__privacy:hover {
+.site-footer__privacy:hover,
+.site-footer__privacy:active {
   opacity: 0.65;
+}
+
+.site-footer__privacy:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 4px;
+  border-radius: var(--radius-2);
 }
 
 @media (max-width: 1024px) {
@@ -2356,6 +2369,104 @@ body.menu-open .menu-overlay__footer {
   font-size: var(--font-size-regular);
   line-height: var(--line-height-loose);
   color: var(--color-gray-700);
+}
+
+/* ── LEGAL (Política de Privacidade / Termos de Uso) ── */
+.legal-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.legal-hero__title {
+  color: var(--color-dark);
+}
+
+.legal-hero__meta {
+  font-size: var(--font-size-regular);
+  color: var(--color-gray-600);
+}
+
+.legal-body {
+  margin-top: var(--space-64);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.legal-body__block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.legal-body h2 {
+  color: var(--color-dark);
+}
+
+.legal-body p {
+  font-size: var(--font-size-regular);
+  line-height: var(--line-height-loose);
+  color: var(--color-gray-700);
+}
+
+.legal-body a {
+  color: var(--color-blue-700);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity var(--transition-fast);
+}
+
+.legal-body a:hover,
+.legal-body a:active {
+  opacity: 0.7;
+}
+
+.legal-body a:focus-visible {
+  outline: 2px solid var(--color-blue-700);
+  outline-offset: 2px;
+  border-radius: var(--radius-2);
+}
+
+.legal-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-top: var(--space-8);
+}
+
+.legal-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+  font-size: var(--font-size-regular);
+  line-height: var(--line-height-loose);
+  color: var(--color-gray-700);
+}
+
+.legal-list__marker {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--color-blue-50);
+  color: var(--color-blue-700);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 768px) {
+  .legal-body {
+    margin-top: var(--space-48);
+    gap: var(--space-40);
+  }
 }
 
 /* ── WHATSAPP FLOAT ──────────────────────── */
