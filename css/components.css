@@ -1336,6 +1336,12 @@ body.menu-open {
   overflow: hidden;
 }
 
+/* Faixa escura para o .site-header em páginas sem hero-foto
+   (404, em-construção) — mantém o logo/menu brancos legíveis. */
+.page-header {
+  background-color: var(--color-blue-900);
+}
+
 .site-header {
   position: relative;
   z-index: 210;
@@ -2311,4 +2317,43 @@ body.menu-open .menu-overlay__footer {
   .cta__frame {
     padding: var(--space-96) var(--space-80);
   }
+}
+
+/* ── STATE PAGE (404 / Em Construção) ────── */
+.state-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.state-page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  max-width: 560px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.state-page__illustration {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+.state-page__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.state-page__title {
+  color: var(--color-dark);
+}
+
+.state-page__desc {
+  font-size: var(--font-size-regular);
+  line-height: var(--line-height-loose);
+  color: var(--color-gray-700);
 }
