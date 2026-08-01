@@ -2559,6 +2559,208 @@ body.menu-open .menu-overlay__footer {
   transform: translateY(0) scale(0.94);
 }
 
+/* ============================================
+   CASE PAGE
+   ============================================ */
+
+/* ── Hero ────────────────────────────────────────
+   Reaproveita .hero / .hero__inner / .hero__content /
+   .hero__main / .hero__title / .hero__scroll (já usados
+   na home). Os modificadores abaixo só ajustam o que é
+   genuinamente diferente: altura por conteúdo (não 100vh)
+   e o par tag+título dividindo a linha com "saiba mais"
+   em vez do layout de 12 colunas da home.
+   ─────────────────────────────────────────────── */
+.hero.hero--case {
+  min-height: auto;
+}
+
+.hero.hero--case .hero__inner {
+  min-height: auto;
+  background-color: var(--color-brand-blue);
+}
+
+.hero__content.hero__content--case {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  align-items: flex-start;
+  gap: var(--space-32);
+  padding: var(--space-64) calc(var(--container-padding) - var(--space-8)) var(--space-48);
+}
+
+.hero__content.hero__content--case .hero__main {
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .hero__content.hero__content--case {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: var(--space-96);
+    padding-bottom: var(--space-64);
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero__content.hero__content--case { padding-top: 184px; }
+}
+
+/* ── Conteúdo (introdução / desafio / solução / resultados) ── */
+.case-content__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+}
+
+.case-content__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.case-content__text {
+  color: var(--color-gray-700);
+  font-size: var(--font-size-regular);
+  line-height: var(--line-height-loose);
+}
+
+.case-content__text p + p { margin-top: var(--space-16); }
+
+.case-content__text--intro {
+  color: var(--color-brand-blue);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-medium);
+}
+
+.case-content__media {
+  border: 1px solid var(--color-blue-50);
+  border-radius: var(--radius-12);
+  padding: var(--space-4);
+  height: 260px;
+}
+
+.case-content__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-8);
+  display: block;
+}
+
+.case-content__divider {
+  height: 1px;
+  background-color: var(--color-blue-50);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .case-content__row {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-32);
+  }
+
+  .case-content__text { max-width: 620px; }
+  .case-content__media { height: 380px; }
+}
+
+@media (min-width: 1025px) {
+  .case-content__container { gap: var(--space-96); }
+  .case-content__text { max-width: 886px; }
+  .case-content__text--intro { max-width: 912px; }
+  .case-content__media { height: 500px; }
+}
+
+/* ── Mais cases ──────────────────────────── */
+.case-mais {
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-blue-50);
+}
+
+.case-mais__container {
+  padding-block: var(--space-80);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-48);
+}
+
+.case-mais__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: center;
+}
+
+.case-mais__title {
+  color: var(--color-dark);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  text-align: center;
+}
+
+.case-mais__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-24);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .case-mais__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1025px) {
+  .case-mais__container { padding-block: var(--space-120); }
+}
+
+/* ── CTA bar ─────────────────────────────── */
+.case-cta {
+  background-color: var(--color-blue-700);
+}
+
+.case-cta__row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+  padding-block: var(--space-24);
+}
+
+.case-cta__text {
+  color: var(--color-white);
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-tighter);
+  white-space: nowrap;
+}
+
+.case-cta__line {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .case-cta__row {
+    flex-direction: row;
+    align-items: center;
+    padding-block: var(--space-40);
+  }
+
+  .case-cta__line {
+    display: block;
+    flex: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 @media (max-width: 767px) {
   .whatsapp-float {
     right: var(--space-16);
