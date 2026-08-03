@@ -1,0 +1,52 @@
+name: Build and deploy to Napoleon
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [sanity-publish]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (fetch cases from Sanity, generate pages)
+        run: npm run build
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: sftp
+          port: 1157
+          local-dir: ./
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            **/.github/**/*
+            **/.claude/**
+            **/.claude/**/*
+            **/scripts/**
+            **/instrucoes/**
+            **/screenshots/**
+            case.template.html
+            package.json
+            package-lock.json
+            vercel.json
+            **/.DS_Store
