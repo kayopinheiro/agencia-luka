@@ -30,8 +30,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: sftp
-          port: 1157
+          protocol: ftps
           local-dir: ./
           server-dir: ${{ secrets.FTP_REMOTE_DIR }}
           exclude: |
