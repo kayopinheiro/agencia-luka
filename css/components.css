@@ -933,6 +933,16 @@ select.input {
   [data-reveal="stagger"][data-reveal-variant="zoom"]        > * { transform: scale(0.95); }
 }
 
+/* Impressão/captura de tela não dispara scroll real, então o GSAP nunca
+   chega a animar até o estado neutro — força tudo visível nesse contexto. */
+@media print {
+  [data-reveal],
+  [data-reveal] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ── MARQUEE ─────────────────────────────── */
 .marquee {
   position: relative;
@@ -1623,7 +1633,7 @@ body.menu-open .menu-overlay__footer {
   overflow: hidden;
   border-radius: var(--radius-16);
   height: 820px;
-  background: var(--color-blue-900) url('../assets/img-hero-home.png') center / cover no-repeat;
+  background: var(--color-blue-900) url('../assets/images/hero-home.png') center / cover no-repeat;
 }
 
 .menu-demo::before {
@@ -1719,7 +1729,7 @@ body.menu-open .menu-overlay__footer {
   top: 37.9%;
   width: 108.8%;
   height: 71.5%;
-  background-image: url('../assets/01. Home/loading-watermark.svg');
+  background-image: url('../assets/loading/watermark.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;

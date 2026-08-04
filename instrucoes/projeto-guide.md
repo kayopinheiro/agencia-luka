@@ -20,18 +20,28 @@ Para extrair dados do Figma via MCP:
 ```
 agencia-luka/
 ├── instrucoes/
-│   └── projeto-guide.md  ← este arquivo
-├── assets/               ← exportar do Figma (imagens, logos, ícones)
-├── screenshots/          ← prints das seções por página (referência visual)
+│   └── projeto-guide.md   ← este arquivo
+├── assets/
+│   ├── icons/              ← ícones de UI e redes sociais
+│   ├── illustrations/      ← ilustrações vetoriais
+│   ├── images/              ← fotos e imagens raster
+│   ├── logos/brand/        ← variantes do logo da Luka
+│   ├── logos/clientes/     ← logos de clientes (marquee/social proof)
+│   ├── loading/              ← assets da tela de loading
+│   └── _unused/              ← assets sem referência ativa (não deletados por precaução)
+├── screenshots/           ← prints das seções por página (referência visual)
 ├── css/
-│   ├── tokens.css        ← variáveis CSS do design system
-│   ├── base.css          ← reset e estilos base
-│   └── components.css    ← componentes reutilizáveis
-├── js/
-│   └── main.js           ← scripts principais
+│   ├── tokens.css         ← variáveis CSS do design system
+│   ├── base.css           ← reset e estilos base
+│   └── components.css     ← componentes reutilizáveis
+├── js/                    ← scripts vanilla, um arquivo por responsabilidade
+├── scripts/build.mjs      ← busca cases no Sanity e gera páginas estáticas
+├── case.template.html     ← template usado pelo build.mjs
+├── docs/handoffs/         ← histórico de sessões de dev (não é doc viva)
 ├── CLAUDE.md
-├── style-guide.html      ← documentação de componentes (criar primeiro)
-└── index.html            ← página principal
+├── README.md              ← visão geral técnica, build e deploy
+├── style-guide.html       ← documentação de componentes
+└── index.html             ← página principal
 ```
 
 ## Fonte de verdade
@@ -46,35 +56,56 @@ agencia-luka/
 
 ## Design System
 
-> Preencha esta seção após extrair do Figma ou conforme o briefing do cliente.
+> Fonte de verdade viva: [`css/tokens.css`](../css/tokens.css). Esta seção espelha os valores atuais — se divergir, o CSS manda.
 
 ### Cores
 | Token | Hex | Uso |
 |---|---|---|
-| --color-primary | #000000 | [preencher após análise do Figma] |
-| --color-secondary | #000000 | [preencher após análise do Figma] |
-| --color-background | #FFFFFF | [fundo padrão] |
-| --color-text | #000000 | [texto principal] |
+| --color-brand-blue | #1e3a8a | Cor primária da marca |
+| --color-brand-green | #10b981 | Accent / cases mídias sociais |
+| --color-brand-violet | #6d28d9 | Accent / cases branding |
+| --color-brand-orange | #f97316 | Accent / CTA, destaques |
+| --color-brand-gray | #d1d5db | Neutro auxiliar |
+| --color-dark | #1a1a1a | Texto escuro / fundos dark |
+| --color-white | #ffffff | Fundo padrão / texto sobre dark |
+
+Além das cores de marca, há escalas completas (50–900) para blue, green, violet, orange e gray — ver `css/tokens.css`.
 
 ### Tipografia
-| Estilo | Tamanho | Peso | Line-height |
-|---|---|---|---|
-| Display | [px] | [peso] | [%] |
-| H1 | [px] | [peso] | [%] |
-| H2 | [px] | [peso] | [%] |
-| Body | [px] | [peso] | [%] |
+**Família:** Poppins (Google Fonts, pesos 400/500/600/700)
 
-**Família:** [Nome da fonte — preencher após análise do Figma]
+Escala fluida (`clamp()`, interpola entre 390px mobile e 1440px desktop):
+
+| Estilo | Tamanho (mobile → desktop) | Line-height |
+|---|---|---|
+| Display | 48px → 72px | 1.2 (tight) |
+| H1 | 40px → 56px | 1.2 (tight) |
+| H2 | 32px → 48px | 1.25 (snug) |
+| H3 | 28px → 40px | 1.25 (snug) |
+| H4 | 24px → 32px | 1.3 (normal) |
+| H5 | 20px → 26px | 1.3 (normal) |
+| H6 | 18px → 22px | 1.3 (normal) |
+| Large | 18px → 20px | 1.35 (relaxed) |
+| Medium (body) | 16px → 18px | 1.35 (relaxed) |
+| Regular | 15px → 16px | 1.5 (loose) |
+| Small | 13px → 14px | 1.5 (loose) |
+| Tiny | 12px | 1.5 (loose) |
+
+Pesos: regular 400 · medium 500 · semibold 600 · bold 700.
 
 ### Grid (Figma)
-- **Desktop:** [N] colunas · [X]px/col · gutter [Y]px · container [Z]px
-- **Mobile:** [N] colunas · margin [X]px · gutter [Y]px
+- **Desktop (1440px):** 12 colunas · 80px/col · gutter 24px · margin 108px (conteúdo útil: 1224px)
+- **Tablet (768px):** 8 colunas · gutter 24px · margin 32px
+- **Mobile (393px):** 4 colunas · gutter 16px · margin 24px
 
 ### Espaçamentos
-- Padding horizontal das seções: [X]px
-- Padding vertical das seções: [Y]px
-- Gap entre colunas: [Z]px
-- Gap entre cards: [W]px
+Escala de tokens (`--space-*`): 0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 120px. Não usar valores fora dessa escala.
+
+### Border radius
+`--radius-*`: 0, 2, 4, 6, 8, 12, 16, 20, 24, 32px, e `--radius-full` (9999px, pills/círculos).
+
+### Sombras
+Em camadas, com tint azul (`rgba(30,58,138,…)`) e opacidade baixa — nunca sombra flat. Escala: `--shadow-sm/md/lg/xl` em `css/tokens.css`.
 
 ## Convenções de classes
 - **Seção:** `.section` + `.section--dark` / `.section--light`
@@ -84,22 +115,40 @@ agencia-luka/
 - **Scroll reveal:** `data-reveal` + `data-reveal="left|right|scale"`
 
 ## Páginas
-| Página | Status | Seções |
+| Página | Status | Observação |
 |---|---|---|
-| style-guide.html | ⬜ Pendente | Documentação de componentes |
-| index.html | ⬜ Pendente | [mapear seções após análise do Figma] |
+| style-guide.html | ✅ Pronto | Documentação viva de todos os componentes |
+| index.html | ✅ Pronto | Hero, Sobre, Serviços, Cases, Depoimentos, FAQ, CTA, Footer |
+| case-*.html (5) | ✅ Gerado | **Não editar à mão** — gerado por `scripts/build.mjs` a partir do Sanity |
+| 404.html | ✅ Pronto | |
+| em-construcao.html | ✅ Pronto | |
+| politica-de-privacidade.html | ✅ Pronto | |
+| termos-de-uso.html | ✅ Pronto | |
 
 ## Assets disponíveis
-> Preencher após exportar do Figma.
 
 ### Logos
-- `assets/logo-[variante].svg` — [uso]
+- `assets/logos/brand/navbar.svg`, `servicos.svg`, `footer.svg`, `marquee.svg` — variantes do logo da Luka
+- `assets/logos/clientes/*.svg` — logos de clientes usados em social proof/marquee
 
 ### Ícones
-- `assets/icon_*.svg`
+- `assets/icons/facebook.svg`, `instagram.svg`, `linkedin.svg`, `pinterest.svg` — redes sociais
+- `assets/icons/arrow-down.svg`, `chevron-forward.svg`, `plus.svg`, `favicon.svg` — UI
+
+### Ilustrações
+- `assets/illustrations/branding.svg`, `web.svg`, `fotografia.svg`, `midias.svg`, `trafego.svg` — serviços
+- `assets/illustrations/cases-wordmark.svg`, `erro-404.svg`, `pagina-em-construcao.svg`
 
 ### Imagens
-- `assets/[nome].png` — [descrição]
+- `assets/images/hero-home.png`, `sobre.png`, `contato.png`, `faq.png` — seções da home
+- `assets/images/servicos-branding.png`, `servicos-fotografia.png`, `servicos-web.png` — cards de serviço
+- `assets/images/og-image.png`, `avatar.png`
+
+### Loading
+- `assets/loading/logo.svg`, `watermark.svg` — tela de loading (todas as páginas)
+
+### _unused
+Assets sem nenhuma referência em HTML/CSS/JS no momento (logos de clientes antigos, imagens de case pré-migração pro Sanity). Mantidos por precaução — se confirmado que não voltam a ser usados, podem ser removidos.
 
 ## Regras absolutas
 - Não inventar cores — usar apenas os tokens definidos acima
