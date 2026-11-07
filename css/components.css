@@ -1648,59 +1648,6 @@ body.menu-open .menu-overlay__footer {
 }
 
 /* ============================================
-   CUSTOM CURSOR
-   ============================================ */
-.has-custom-cursor,
-.has-custom-cursor a,
-.has-custom-cursor button {
-  cursor: none;
-}
-
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0 -20px;
-  border-radius: 50%;
-  background-color: var(--color-brand-orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--transition-fast);
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform-origin: center center;
-}
-
-.cursor-dot.is-visible {
-  opacity: 1;
-}
-
-.cursor-dot.is-hover {
-  background-color: var(--color-white);
-  box-shadow: 0 0 0 1.5px var(--color-blue-100);
-}
-
-.cursor-dot__arrow {
-  width: 20px;
-  height: 20px;
-  fill: var(--color-brand-blue);
-  opacity: 0;
-  shape-rendering: geometricPrecision;
-  transition: opacity var(--transition-fast);
-}
-
-.cursor-dot.is-hover .cursor-dot__arrow {
-  opacity: 1;
-}
-
-/* ============================================
    LOADING SCREEN
    ============================================ */
 .loading-screen {
