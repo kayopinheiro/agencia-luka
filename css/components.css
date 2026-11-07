@@ -2659,6 +2659,21 @@ body.menu-open .menu-overlay__footer {
   display: block;
 }
 
+.case-content__video {
+  border: 1px solid var(--color-blue-50);
+  border-radius: var(--radius-12);
+  padding: var(--space-4);
+}
+
+.case-content__video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-8);
+  display: block;
+  background-color: var(--color-dark);
+}
+
 .case-content__divider {
   height: 1px;
   background-color: var(--color-blue-50);

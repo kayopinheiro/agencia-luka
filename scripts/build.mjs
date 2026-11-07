@@ -29,6 +29,7 @@ const QUERY = `*[_type=="case"]|order(order asc){
   challengeText,
   "challengeImageUrl": challengeImage.asset->url,
   solutionText,
+  solutionVideo,
   results
 }`
 
@@ -48,6 +49,51 @@ function escapeHtml(str) {
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
+}
+
+// Converte um link de YouTube/Vimeo na URL de embed. Retorna '' se não reconhecer.
+function videoEmbedUrl(rawUrl) {
+  if (!rawUrl || typeof rawUrl !== 'string') return ''
+  let url
+  try {
+    url = new URL(rawUrl.trim())
+  } catch {
+    return ''
+  }
+  if (!['http:', 'https:'].includes(url.protocol)) return ''
+  const host = url.hostname.replace(/^(www\.|m\.)/, '')
+  const parts = url.pathname.split('/').filter(Boolean)
+
+  let youtubeId = ''
+  if (host === 'youtu.be') {
+    youtubeId = parts[0] || ''
+  } else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+    if (parts[0] === 'watch') youtubeId = url.searchParams.get('v') || ''
+    else if (['embed', 'shorts', 'live', 'v'].includes(parts[0])) youtubeId = parts[1] || ''
+  }
+  if (youtubeId) {
+    if (!/^[\w-]{11}$/.test(youtubeId)) return ''
+    return `https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0`
+  }
+
+  if (host === 'vimeo.com' || host === 'player.vimeo.com') {
+    const segments = host === 'player.vimeo.com' && parts[0] === 'video' ? parts.slice(1) : parts
+    const id = segments.find((s) => /^\d+$/.test(s))
+    if (!id) return ''
+    const hash = url.searchParams.get('h') || segments[segments.indexOf(id) + 1] || ''
+    const query = /^[0-9a-f]+$/i.test(hash) ? `?h=${hash}&dnt=1` : '?dnt=1'
+    return `https://player.vimeo.com/video/${id}${query}`
+  }
+  return ''
+}
+
+function renderSolutionVideo(rawUrl, title) {
+  const embedUrl = videoEmbedUrl(rawUrl)
+  if (!embedUrl) return ''
+  return `        <div class="case-content__video" data-reveal="fade-up">
+          <iframe src="${escapeHtml(embedUrl)}" title="Vídeo do case ${escapeHtml(title)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+`
 }
 
 function portableTextToHtml(blocks) {
@@ -118,6 +164,7 @@ async function buildCasePages(cases) {
       challengeText: escapeHtml(item.challengeText),
       challengeImageUrl: item.challengeImageUrl || PLACEHOLDER_IMAGE,
       solutionHtml: portableTextToHtml(item.solutionText),
+      solutionVideoHtml: renderSolutionVideo(item.solutionVideo, item.title),
       resultsText: escapeHtml(item.results),
       maisCasesHtml: others.map(renderMaisCasesCard).join('\n\n'),
     })
