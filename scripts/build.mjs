@@ -48,8 +48,15 @@ async function sanityQuery(query) {
   return result
 }
 
+const TESTIMONIALS_QUERY = `*[_type=="testimonial" && defined(name) && defined(quote)]|order(order asc, _createdAt asc){
+  name,
+  company,
+  quote
+}`
+
 const fetchCases = () => sanityQuery(QUERY)
 const fetchLogos = () => sanityQuery(LOGOS_QUERY)
+const fetchTestimonials = () => sanityQuery(TESTIMONIALS_QUERY)
 
 function escapeHtml(str) {
   return String(str ?? '')
@@ -258,6 +265,58 @@ async function buildLogosMarquee() {
   console.log(`✔ index.html logos marquee updated (${logos.length} logos)`)
 }
 
+function renderTestimonialCard(item) {
+  const role = item.company ? `\n                  <span class="card-depoimento__role">${escapeHtml(item.company)}</span>` : ''
+  // As iniciais do avatar são preenchidas por js/depoimentos.js a partir de data-avatar-name.
+  return `          <div class="card-depoimento">
+            <div class="card-depoimento__inner">
+              <div class="card-depoimento__header">
+                <div class="card-depoimento__avatar" data-avatar-name="${escapeHtml(item.name)}">
+                  <span class="card-depoimento__initials"></span>
+                </div>
+                <div class="card-depoimento__info">
+                  <span class="card-depoimento__name">${escapeHtml(item.name)}</span>${role}
+                </div>
+              </div>
+              <p class="card-depoimento__quote">${escapeHtml(item.quote.trim())}</p>
+            </div>
+          </div>`
+}
+
+async function buildTestimonials() {
+  // Mesmo princípio dos logos: nunca apaga a seção. Lista vazia ou erro no
+  // Sanity => mantém o HTML atual da home.
+  let items
+  try {
+    items = await fetchTestimonials()
+  } catch (err) {
+    console.warn(`⚠ Depoimentos: ${err.message} — seção da home mantida como está`)
+    return
+  }
+  if (!Array.isArray(items) || items.length === 0) {
+    console.warn('⚠ Depoimentos: nenhum depoimento no Sanity — seção da home mantida como está')
+    return
+  }
+
+  const indexPath = path.join(root, 'index.html')
+  const index = await readFile(indexPath, 'utf8')
+  const startMarker = '<!-- TESTIMONIALS_START -->'
+  const endMarker = '<!-- TESTIMONIALS_END -->'
+  const startIdx = index.indexOf(startMarker)
+  const endIdx = index.indexOf(endMarker)
+
+  if (startIdx === -1 || endIdx === -1) {
+    throw new Error(`Markers ${startMarker} / ${endMarker} not found in index.html`)
+  }
+
+  const html = items.map(renderTestimonialCard).join('\n\n')
+  const updated =
+    index.slice(0, startIdx + startMarker.length) + '\n\n' + html + '\n\n          ' + index.slice(endIdx)
+
+  await writeFile(indexPath, updated)
+  console.log(`✔ index.html testimonials updated (${items.length} depoimentos)`)
+}
+
 async function main() {
   const cases = await fetchCases()
   if (!cases.length) {
@@ -266,6 +325,7 @@ async function main() {
   await buildCasePages(cases)
   await buildHomeGrid(cases)
   await buildLogosMarquee()
+  await buildTestimonials()
 }
 
 main().catch((err) => {
