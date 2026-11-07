@@ -54,6 +54,12 @@ const TESTIMONIALS_QUERY = `*[_type=="testimonial" && defined(name) && defined(q
   quote
 }`
 
+const FAQ_QUERY = `*[_type=="faq" && defined(question) && defined(answer)]|order(order asc, _createdAt asc){
+  question,
+  answer
+}`
+
+const fetchFaq = () => sanityQuery(FAQ_QUERY)
 const fetchCases = () => sanityQuery(QUERY)
 const fetchLogos = () => sanityQuery(LOGOS_QUERY)
 const fetchTestimonials = () => sanityQuery(TESTIMONIALS_QUERY)
@@ -317,6 +323,56 @@ async function buildTestimonials() {
   console.log(`✔ index.html testimonials updated (${items.length} depoimentos)`)
 }
 
+function renderFaqItem(item) {
+  return `          <div class="faq-item">
+            <button class="faq-item__trigger" aria-expanded="false">
+              <span class="faq-item__question">${escapeHtml(item.question.trim())}</span>
+              <span class="faq-item__icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>
+              </span>
+            </button>
+            <div class="faq-item__body">
+              <div class="faq-item__body-inner">
+                <p class="faq-item__answer">${escapeHtml(item.answer.trim())}</p>
+              </div>
+            </div>
+          </div>`
+}
+
+async function buildFaq() {
+  // Mesmo princípio de logos/depoimentos: nunca apaga a seção. Lista vazia ou
+  // erro no Sanity => mantém o FAQ atual da home.
+  let items
+  try {
+    items = await fetchFaq()
+  } catch (err) {
+    console.warn(`⚠ FAQ: ${err.message} — seção da home mantida como está`)
+    return
+  }
+  if (!Array.isArray(items) || items.length === 0) {
+    console.warn('⚠ FAQ: nenhuma pergunta no Sanity — seção da home mantida como está')
+    return
+  }
+
+  const indexPath = path.join(root, 'index.html')
+  const index = await readFile(indexPath, 'utf8')
+  const startMarker = '<!-- FAQ_START -->'
+  const endMarker = '<!-- FAQ_END -->'
+  const startIdx = index.indexOf(startMarker)
+  const endIdx = index.indexOf(endMarker)
+
+  if (startIdx === -1 || endIdx === -1) {
+    throw new Error(`Markers ${startMarker} / ${endMarker} not found in index.html`)
+  }
+
+  const html = items.map(renderFaqItem).join('\n\n')
+  const updated =
+    index.slice(0, startIdx + startMarker.length) + '\n' + html + '\n' + '          ' + index.slice(endIdx)
+
+  await writeFile(indexPath, updated)
+  console.log(`✔ index.html FAQ updated (${items.length} perguntas)`)
+}
+
 async function main() {
   const cases = await fetchCases()
   if (!cases.length) {
@@ -326,6 +382,7 @@ async function main() {
   await buildHomeGrid(cases)
   await buildLogosMarquee()
   await buildTestimonials()
+  await buildFaq()
 }
 
 main().catch((err) => {
