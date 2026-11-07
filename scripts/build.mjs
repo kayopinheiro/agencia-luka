@@ -371,6 +371,43 @@ async function buildFaq() {
 
   await writeFile(indexPath, updated)
   console.log(`✔ index.html FAQ updated (${items.length} perguntas)`)
+
+  await buildFaqJsonLd(items)
+}
+
+// Dados estruturados FAQPage (schema.org) gerados das mesmas perguntas do FAQ,
+// para buscadores e assistentes de IA. Invisível na página.
+async function buildFaqJsonLd(items) {
+  const indexPath = path.join(root, 'index.html')
+  const index = await readFile(indexPath, 'utf8')
+  const startMarker = '<!-- FAQ_JSONLD_START -->'
+  const endMarker = '<!-- FAQ_JSONLD_END -->'
+  const startIdx = index.indexOf(startMarker)
+  const endIdx = index.indexOf(endMarker)
+
+  if (startIdx === -1 || endIdx === -1) {
+    console.warn(`⚠ FAQ JSON-LD: marcadores ${startMarker} / ${endMarker} não encontrados — pulando`)
+    return
+  }
+
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question.trim(),
+      acceptedAnswer: {'@type': 'Answer', text: item.answer.trim()},
+    })),
+  }
+  // "<" escapado para o conteúdo nunca conseguir fechar a tag <script>.
+  const json = JSON.stringify(data, null, 2).replaceAll('<', '\\u003c').replace(/^/gm, '  ')
+  const updated =
+    index.slice(0, startIdx + startMarker.length) +
+    `\n  <script type="application/ld+json">\n${json}\n  </script>\n  ` +
+    index.slice(endIdx)
+
+  await writeFile(indexPath, updated)
+  console.log('✔ index.html FAQ JSON-LD updated')
 }
 
 async function main() {
