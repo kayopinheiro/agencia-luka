@@ -33,8 +33,13 @@ const QUERY = `*[_type=="case"]|order(order asc){
   results
 }`
 
-async function fetchCases() {
-  const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${encodeURIComponent(QUERY)}`
+const LOGOS_QUERY = `*[_type=="clientLogos"][0].logos[defined(logo.asset)]{
+  name,
+  "url": logo.asset->url
+}`
+
+async function sanityQuery(query) {
+  const url = `https://${PROJECT_ID}.api.sanity.io/v${API_VERSION}/data/query/${DATASET}?query=${encodeURIComponent(query)}`
   const res = await fetch(url)
   if (!res.ok) {
     throw new Error(`Sanity query failed: ${res.status} ${res.statusText}`)
@@ -42,6 +47,9 @@ async function fetchCases() {
   const {result} = await res.json()
   return result
 }
+
+const fetchCases = () => sanityQuery(QUERY)
+const fetchLogos = () => sanityQuery(LOGOS_QUERY)
 
 function escapeHtml(str) {
   return String(str ?? '')
@@ -199,6 +207,57 @@ async function buildHomeGrid(cases) {
   console.log('✔ index.html cases grid updated')
 }
 
+// Mesmo mínimo validado no Studio: com menos logos o marquee não preenche a largura.
+const MIN_LOGOS = 8
+
+function renderLogoGroup(logos, {decorative}) {
+  const attrs = decorative ? ' aria-hidden="true"' : ''
+  const items = logos
+    .map((logo) => {
+      const alt = decorative ? '' : escapeHtml(logo.name)
+      return `              <div class="marquee__item"><img src="${escapeHtml(logo.url)}" alt="${alt}"></div>`
+    })
+    .join('\n')
+  return `            <div class="marquee__group"${attrs}>\n${items}\n            </div>`
+}
+
+async function buildLogosMarquee() {
+  // Falha aqui NUNCA derruba o build nem apaga o marquee: se a lista vier
+  // vazia, curta ou o Sanity falhar, o HTML atual da home é mantido.
+  let logos
+  try {
+    logos = await fetchLogos()
+  } catch (err) {
+    console.warn(`⚠ Logos de clientes: ${err.message} — marquee da home mantido como está`)
+    return
+  }
+  if (!Array.isArray(logos) || logos.length < MIN_LOGOS) {
+    console.warn(
+      `⚠ Logos de clientes: ${Array.isArray(logos) ? logos.length : 0} logo(s) no Sanity (mínimo ${MIN_LOGOS}) — marquee da home mantido como está`,
+    )
+    return
+  }
+
+  const indexPath = path.join(root, 'index.html')
+  const index = await readFile(indexPath, 'utf8')
+  const startMarker = '<!-- LOGOS_START -->'
+  const endMarker = '<!-- LOGOS_END -->'
+  const startIdx = index.indexOf(startMarker)
+  const endIdx = index.indexOf(endMarker)
+
+  if (startIdx === -1 || endIdx === -1) {
+    throw new Error(`Markers ${startMarker} / ${endMarker} not found in index.html`)
+  }
+
+  // Dois grupos idênticos: o segundo (aria-hidden) existe só para o loop infinito.
+  const html = [renderLogoGroup(logos, {decorative: false}), renderLogoGroup(logos, {decorative: true})].join('\n')
+  const updated =
+    index.slice(0, startIdx + startMarker.length) + '\n' + html + '\n            ' + index.slice(endIdx)
+
+  await writeFile(indexPath, updated)
+  console.log(`✔ index.html logos marquee updated (${logos.length} logos)`)
+}
+
 async function main() {
   const cases = await fetchCases()
   if (!cases.length) {
@@ -206,6 +265,7 @@ async function main() {
   }
   await buildCasePages(cases)
   await buildHomeGrid(cases)
+  await buildLogosMarquee()
 }
 
 main().catch((err) => {
